@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Row, Col } from 'antd';
+import { Button, Row, Col, Input } from 'antd';
 import { connect } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import * as actions from '../redux/actions';
@@ -56,8 +56,16 @@ const HomeSignin = ({ history, logIn, manageFailedGoogleLogin }) => {
           </Button>
         </p>
       </Col>
+      Make this input controlled with the store. That means the store should
+      change when a user adds chararcters or deletes them
+      <Input />
     </Row>
   );
 };
 
-export default connect(null, actions)(HomeSignin);
+const mapStateToProps = (state) => {
+  return {
+    inputInfo: state.exampleInput,
+  };
+};
+export default connect(mapStateToProps, actions)(HomeSignin);
