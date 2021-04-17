@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { List, Avatar, Space } from 'antd';
+import { List, Avatar, Space, Button } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 
 // import MentorProfile from "./MentorProfile";
@@ -117,15 +117,18 @@ const Dashboard = () => {
           ) : ( */}
             <div>
               <h4> Uh oh! You don't have any mentoring sessions booked yet.</h4>
-              <p> Press the green button below to make your first booking!</p>
+              <Button
+                type="primary"
+                href="/booking/"
+                target="_blank"
+              >Book a Mentoring Session</Button>
+              <Button
+                href="https://calendar.google.com/calendar/r"
+                target="_blank"
+              >
+                View Calendar
+              </Button>
             </div>
-      <a href="/booking/">Book</a>
-      <a
-        href="https://calendar.google.com/calendar/r"
-        target="_blank"
-      >
-        View Calendar
-      </a>
       {/* <MentorProfile /> */}
       <h1>Resources</h1>
       <p>
