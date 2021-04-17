@@ -126,14 +126,17 @@ const Dashboard = () => {
                 href="https://calendar.google.com/calendar/r"
                 target="_blank"
               >
-                View Calendar
+                View Your Calendar
               </Button>
             </div>
       {/* <MentorProfile /> */}
       <h1>Resources</h1>
       <p>
         If you would like to change a mentoring session or have any mentoring-related questions, please
-        <a href="mailto:mentor@villagebookbuilders.org">
+        <a 
+        href="mailto:mentor@villagebookbuilders.org"
+        style={{ marginLeft: '5px' }}
+        >
           contact your mentor advisor
         </a>
         .
