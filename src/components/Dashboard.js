@@ -1,9 +1,104 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { List, Avatar, Space } from 'antd';
+import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 
 // import MentorProfile from "./MentorProfile";
 
 const Dashboard = () => {
+
+  const resourceData = [
+    {
+      href: 'https://360.articulate.com/review/content/73bf3afe-47f9-4f9f-aa4d-70bf27fbe8d5/review',
+      title: 'Mentor Training Module',
+      avatar: '',
+      description:
+        '',
+      content:
+        '',
+    },
+    {
+      href: 'mailto:mentor@villagebookbuilders.org',
+      title: 'Mentor Advisor Contact',
+      avatar: '',
+      description:
+        '',
+      content:
+        '',
+    },
+    {
+      href: 'https://docs.google.com/document/d/e/2PACX-1vR5-WnzhSJ88pfh2yctr7JuRXglAD55q8eluMPnLA1fTIyeKxxrGvL4r7D7wZh8mvd6WTL9GJJ1tkdD/pub',
+      title: 'Mentoring Guide',
+      avatar: '',
+      description:
+        '',
+      content:
+        '',
+    },
+    {
+      href: 'https://idroo.com/',
+      title: 'Whiteboard',
+      avatar: '',
+      description:
+        '',
+      content:
+        '',
+    },
+    {
+      href: 'https://www.khanacademy.org/',
+      title: 'Khan Academy',
+      avatar: '',
+      description:
+        '',
+      content:
+        '',
+    },
+    {
+      href: 'https://classroom.google.com/u/0/h',
+      title: 'Google Classroom',
+      avatar: '',
+      description:
+        '',
+      content:
+        '',
+    },
+    {
+      href: 'https://www.facebook.com/groups/villagementors',
+      title: 'VBB Mentors Facebook Group',
+      avatar: '',
+      description:
+        '',
+      content:
+        '',
+    },
+    {
+      href: 'https://apps.google.com/meet/',
+      title: 'Google Meet',
+      avatar: '',
+      description:
+        '',
+      content:
+        '',
+    },
+    {
+      href: 'https://www.facebook.com/VillageBookBuilders',
+      title: 'VBB Facebook Page',
+      avatar: '',
+      description:
+        '',
+      content:
+        '',
+    },
+    {
+      href: 'https://www.villagebookbuilders.org/',
+      title: 'VBB Website',
+      avatar: '',
+      description:
+        '',
+      content:
+        '',
+    }
+  ];
 
   return (
     <div>
@@ -32,96 +127,17 @@ const Dashboard = () => {
         View Calendar
       </a>
       {/* <MentorProfile /> */}
+      <h1>Resources</h1>
+      <p>
+        If you would like to change a mentoring session or have any mentoring-related questions, please
+        <a href="mailto:mentor@villagebookbuilders.org">
+          contact your mentor advisor
+        </a>
+        .
+      </p>
     </div>
   )
 }
-
-//     return (
-//         <>
-//           <h1>Resources</h1>
-//           <div>
-//             <a
-//               href="https://360.articulate.com/review/content/73bf3afe-47f9-4f9f-aa4d-70bf27fbe8d5/review"
-//               target="_blank"
-//             >
-//               Mentor Training Module
-//             </a>
-//             <a
-//               href="mailto:mentor@villagebookbuilders.org"
-//             >
-//               Contact your Mentor Advisor
-//             </a>
-//             {/*bold the contact*/}
-//             <a
-//               href="https://docs.google.com/document/d/e/2PACX-1vR5-WnzhSJ88pfh2yctr7JuRXglAD55q8eluMPnLA1fTIyeKxxrGvL4r7D7wZh8mvd6WTL9GJJ1tkdD/pub"
-//               target="_blank"
-//               rel="noopener noreferrer"
-//             >
-//               Mentoring Guide
-//             </a>
-//             <a
-//               href="https://idroo.com/"
-//               target="_blank"
-//               rel="noopener noreferrer"
-//             >
-//               Whiteboard
-//             </a>
-//             <a
-//               href="https://www.khanacademy.org/"
-//               target="_blank"
-//               rel="noopener noreferrer"
-//             >
-//               Khan Academy
-//             </a>
-//             <a
-//               href="https://classroom.google.com/u/0/h"
-//               target="_blank"
-//               rel="noopener noreferrer"
-//             >
-//               Google Classroom
-//             </a>
-//             <a
-//               href="https://www.facebook.com/groups/villagementors"
-//               target="_blank"
-//               rel="noopener noreferrer"
-//             >
-//               Village Mentors FB Group
-//             </a>
-//             <a
-//               href="https://apps.google.com/meet/"
-//               target="_blank"
-//               rel="noopener noreferrer"
-//             >
-//               Google Meets
-//             </a>
-//             <a
-//               href="https://www.facebook.com/VillageBookBuilders"
-//               target="_blank"
-//               rel="noopener noreferrer"
-//             >
-//               VBB Facebook Page
-//             </a>
-//             <a
-//               href="https://www.villagebookbuilders.org/"
-//               target="_blank"
-//               rel="noopener noreferrer"
-//             >
-//               VBB Home Website
-//             </a>
-//           </div>
-//           <p>
-//             <b>
-//               If you would like to change a mentoring session, have questions
-//               about mentoring, or ANY QUESTIONS, please
-//               <a href="mailto:mentor@villagebookbuilders.org">
-//                 contact your mentor advisor
-//               </a>
-//               at mentor@villagebookbuilders.org!
-//             </b>
-//           </p>
-//         </>
-//     )
-// }
 
 const mapStateToProps = (state) => {
   return {
