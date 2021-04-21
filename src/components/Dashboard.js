@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, Col, Row, Button } from 'antd';
+import { Card, Col, Row, Button, Alert } from 'antd';
 
 import articulate from '../images/articulate-icon.png';
 import meet from '../images/meet-icon.webp';
@@ -16,9 +16,15 @@ const Dashboard = () => {
 
   const { Meta } = Card;
 
+  const onClose = (e) => {
+    console.log(e, 'Alert was closed.');
+  };
+
   return (
     <div>
-      <h1>Weekly Mentoring Session</h1>
+      <h1>
+        Weekly Mentoring Session
+      </h1>
       {/* {sessionslots && sessionslots.length > 0 ? (
             <ul>
               {sessionslots.map((apt) => {
@@ -32,13 +38,22 @@ const Dashboard = () => {
             </ul>
           ) : ( */}
             <div>
-              <h4> Uh oh! You don't have any mentoring sessions booked yet.</h4>
+            <Alert
+              style={{ margin: '1rem 0 1rem 0' }}
+              message="Uh oh! You don't have any mentoring sessions booked yet."
+              type="warning"
+              closable
+              showIcon
+              onClose={onClose}
+            />
               <Button
+                style={{ margin: '1rem 1rem 1rem 0' }}
                 type="primary"
                 href="/booking/"
                 target="_blank"
               >Book a Mentoring Session</Button>
               <Button
+                style={{ margin: '0 0 2rem 0' }}
                 href="https://calendar.google.com/calendar/r"
                 target="_blank"
               >
@@ -56,7 +71,9 @@ const Dashboard = () => {
               </p>
             </div>
       {/* <MentorProfile /> */}
-      <h1>Resources</h1>
+      <h1 style={{ paddingTop: '2rem' }}>
+        Resources
+      </h1>
       <div>
           <Row>
             <Col sm={12} md={12} lg={6} xl={6}>
