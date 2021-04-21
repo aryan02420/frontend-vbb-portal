@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Card, Col, Row, Button } from 'antd';
 
-import articulate from '../images/articulate.png';
-import meet from '../images/meet.jpg';
-import classroom from '../images/classroom.jpg';
-import village from '../images/vbb-picture-logo.png';
-import facebook from '../images/facebook.png';
-import idroo from '../images/idroo.png';
-import khan from '../images/khan.png';
+import articulate from '../images/articulate-icon.png';
+import meet from '../images/meet-icon.webp';
+import classroom from '../images/classroom-icon.png';
+import village from '../images/village.png';
+import facebook from '../images/facebook-icon.png';
+import idroo from '../images/idroo-icon.png';
+import khan from '../images/khan-icon.jpg';
 
 // import MentorProfile from "./MentorProfile";
 
@@ -52,7 +52,7 @@ const Dashboard = () => {
             <Col span={8}>
               <a href=''></a>
               <Card
-                style={{ width: 300 }}
+                style={{ width: 200 }}
                 cover={
                   <img
                     alt="Articulate logo"
@@ -68,7 +68,7 @@ const Dashboard = () => {
             </Col>
             <Col span={8}>
             <Card
-                style={{ width: 300 }}
+                style={{ width: 200 }}
                 cover={
                   <img
                     alt='Village Book Builders logo'
@@ -85,7 +85,7 @@ const Dashboard = () => {
             <Col span={8}>
               <a href='https://docs.google.com/document/d/e/2PACX-1vR5-WnzhSJ88pfh2yctr7JuRXglAD55q8eluMPnLA1fTIyeKxxrGvL4r7D7wZh8mvd6WTL9GJJ1tkdD/pub'></a>
               <Card
-                  style={{ width: 300 }}
+                  style={{ width: 200 }}
                   cover={
                     <img
                     alt="Village Book Builders logo"
@@ -102,7 +102,7 @@ const Dashboard = () => {
               <Col span={8}>
                 <a href='https://idroo.com/'></a>
                 <Card
-                  style={{ width: 300 }}
+                  style={{ width: 200 }}
                   cover={
                     <img
                     alt=""
@@ -119,7 +119,7 @@ const Dashboard = () => {
               <Col span={8}>
                 <a href='https://www.khanacademy.org/'></a>
                 <Card
-                  style={{ width: 300 }}
+                  style={{ width: 200 }}
                   cover={
                     <img
                     alt=""
@@ -136,7 +136,7 @@ const Dashboard = () => {
               <Col span={8}>
                 <a href='https://classroom.google.com/u/0/h'></a>
                 <Card
-                  style={{ width: 300 }}
+                  style={{ width: 200 }}
                   cover={
                     <img
                     alt=""
@@ -150,10 +150,10 @@ const Dashboard = () => {
                   />
                 </Card>,
               </Col>
-              <Col>
+              <Col span={8}>
                 <a href='https://apps.google.com/meet/'></a>
                 <Card
-                  style={{ width: 300 }}
+                  style={{ width: 200 }}
                   cover={
                     <img
                     alt=""
@@ -167,10 +167,10 @@ const Dashboard = () => {
                   />
                 </Card>,
               </Col>
-              <Col>
+              <Col span={8}>
                 <a href='https://www.facebook.com/groups/villagementors'></a>
                 <Card
-                  style={{ width: 300 }}
+                  style={{ width: 200 }}
                   cover={
                     <img
                     alt=""
@@ -184,10 +184,10 @@ const Dashboard = () => {
                   />
                 </Card>,
               </Col>
-              <Col>
+              <Col span={8}>
                 <a href='https://www.facebook.com/VillageBookBuilders'></a>
                 <Card
-                  style={{ width: 300 }}
+                  style={{ width: 200 }}
                   cover={
                     <img
                     alt=""
@@ -201,10 +201,10 @@ const Dashboard = () => {
                   />
                 </Card>,
               </Col>
-              <Col>
+              <Col span={8}>
                 <a href='https://www.villagebookbuilders.org/'></a>
                 <Card
-                  style={{ width: 300 }}
+                  style={{ width: 200 }}
                   cover={
                     <img
                     alt=""
@@ -217,7 +217,7 @@ const Dashboard = () => {
                     description=""
                   />
                 </Card>,
-            </Col>
+              </Col>
           </Row>
         </div>,
       <p>
