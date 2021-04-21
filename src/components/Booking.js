@@ -8,19 +8,19 @@ import menteeComputer from '../images/vbb-mentee-computer.png';
 
 class Booking extends React.Component {
   state = {
-    libraries: [],
-    languages: {},
-    times: [],
-    time_zone: moment.tz.guess(),
-    language: 1,
-    weekday: 0,
-    displayDay: '',
-    library: 0,
-    time: false,
-    displayTime: '',
-    isReturning: true,
-    isCommitted: false,
-    sameAppointment: 'no',
+    libraries: [], // async
+    languages: {}, // async
+    times: [], // async
+  //   time_zone: moment.tz.guess(), 
+  // language: 1,
+  //   weekday: 0, 
+  //   displayDay: '',
+  // library: 0, /
+  //   time: false,
+  //   displayTime: '',
+  //   isReturning: true,
+  //   isCommitted: false,
+  //   sameAppointment: 'no',
   };
 
   componentDidMount() {
@@ -61,10 +61,10 @@ class Booking extends React.Component {
     axios
       .get('http://127.0.0.1:8000/api/available/', {
         params: {
-          library: this.state.library,
-          language: this.state.language,
-          min_msm: this.shift_time(parseInt(this.state.weekday), false),
-          max_msm: this.shift_time(parseInt(this.state.weekday), false) + 1440,
+          library: this.props.library,
+          language: this.props.language,
+          min_msm: this.shift_time(parseInt(this.props.weekday), false),
+          max_msm: this.shift_time(parseInt(this.props.weekday), false) + 1440,
         },
       })
       .then((res) => {
@@ -114,7 +114,7 @@ class Booking extends React.Component {
 
   shift_time = (msm, isEastern) => {
     var now = moment();
-    now.tz(this.state.time_zone);
+    now.tz(this.props.time_zone);
     var localOffset = now.utcOffset();
     //eastern time zone is the server standard as of 8/1/2020
     now.tz('US/Eastern');
@@ -125,26 +125,26 @@ class Booking extends React.Component {
     return (msm - diffInMinutes + 10080) % 10080;
   };
 
-  handleMentorChange = () => {
-    this.setState(
-      {
-        isReturning: !this.state.isReturning,
-      },
-      () => {
-        if (!this.state.isReturning) {
-          this.setState({
-            library: 0,
-          });
-        }
-      }
-    );
-  };
+  // handleMentorChange = () => { // modify
+  //   this.setState(
+  //     {
+  //       isReturning: !this.state.isReturning,  // modify
+  //     },
+  //     () => {
+  //       if (!this.state.isReturning) {
+  //         this.setState({  // modify
+  //           library: 0,
+  //         });
+  //       }
+  //     }
+  //   );
+  // };
 
-  handleCommitChange = (e) => {
-    this.setState({
-      isCommitted: !this.state.isCommitted,
-    });
-  };
+  // handleCommitChange = (e) => {
+  //   this.setState({
+  //     isCommitted: !this.state.isCommitted,  // modify
+  //   });
+  // };
 
   handleDropDownChange = (e) => {
     var newState = {};
@@ -157,7 +157,7 @@ class Booking extends React.Component {
   };
 
   submitRequest = () => {
-    this.handleCommitChange();
+    this.props.handleCommitChange(); // modify
     this.postRequest();
   };
 
@@ -174,9 +174,9 @@ class Booking extends React.Component {
     axios
       .post('http://127.0.0.1:8000/api/book/', null, {
         params: {
-          library: this.state.library,
-          language: this.state.language,
-          msm: this.state.time,
+          library: this.props.library,
+          language: this.props.language,
+          msm: this.props.time,
         },
       })
       .then((res) => {
@@ -229,7 +229,7 @@ class Booking extends React.Component {
               name="time_zone"
               id="time_zone"
               onChange={this.handleDropDownChange}
-              value={this.state.time_zone}
+              value={this.props.time_zone}
             >
               {moment.tz.names().map((tz) => {
                 return (
@@ -250,7 +250,7 @@ class Booking extends React.Component {
             /> */}
             {/* <label htmlFor="mentor">Are you a returning mentor?</label> */}
             {/* <div id="ex-space" /> */}
-            {this.state.isReturning && (
+            {this.props.isReturning && (
               <div>
                 <label htmlFor="library">
                   {/* style={{ paddingLeft: "50px" }} */}
@@ -309,7 +309,7 @@ class Booking extends React.Component {
             </select>
             <br />
             <br />
-            {this.state.time && (
+            {this.props.time && (
               <div>
                 <label>
                   Please confirm that the time and library you have selected
@@ -326,7 +326,7 @@ class Booking extends React.Component {
                   name="sameAppointment"
                   id="sameAppointment"
                   onChange={this.handleDropDownChange}
-                  value={this.state.sameAppointment}
+                  value={this.props.sameAppointment}
                 >
                   <option value="no">No, or I am unsure</option>
                   <option value="yes">Yes, I am sure this slot is mine</option>
@@ -336,19 +336,19 @@ class Booking extends React.Component {
                 <br />
               </div>
             )}
-            {this.state.sameAppointment === 'yes' && (
+            {this.props.sameAppointment === 'yes' && (
               <div>
                 <input
                   type="checkbox"
                   id="commitment"
                   name="commitment"
-                  checked={this.state.isCommitted}
-                  onChange={this.handleCommitChange}
+                  checked={this.props.isCommitted}
+                  onChange={this.props.handleCommitChange} // modify
                 />
                 <label htmlFor="commitment">
                   Please double check that the time you have selected (every{' '}
-                  {this.display_day(this.state.weekday)} at{' '}
-                  {this.display_time(parseInt(this.state.time))}) is your
+                  {this.display_day(this.props.weekday)} at{' '}
+                  {this.display_time(parseInt(this.props.time))}) is your
                   current mentoring time
                 </label>
                 <br />
@@ -374,7 +374,7 @@ class Booking extends React.Component {
           <button
             className="btn btn-light"
             id="requestsession-btn"
-            disabled={!this.state.isCommitted || this.state.time === false}
+            disabled={!this.props.isCommitted || this.props.time === false}
             onClick={this.submitRequest}
           >
             REQUEST SESSION
@@ -394,7 +394,23 @@ class Booking extends React.Component {
 const mapStateToProps = (state) => {
   return {
     token: state.authToken,
+    language: state.booking.language,
+    weekday: state.booking.weekday,
+    displayDay: state.booking.displayDay,
+    library: state.booking.library,
+    time: state.booking.time,
+    displayTime: state.booking.displayTime,
+    isReturning: state.booking.isReturning,
+    isCommitted: state.booking.isCommitted,
+    sameAppointment: state.booking.sameAppointment,
   };
 };
 
-export default connect(mapStateToProps)(Booking);
+const mapDispatchToProps = dispatch => {
+  return {
+    handleMentorChange: () => dispatch({type: 'MENTOR'}),
+    handleCommitChange: () => dispatch({type: 'COMMITE'}),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Booking);
