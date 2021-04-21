@@ -1,104 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { List, Avatar, Space, Button } from 'antd';
-import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
+import { Card, Col, Row, Button } from 'antd';
 
 // import MentorProfile from "./MentorProfile";
 
 const Dashboard = () => {
 
-  const resourceData = [
-    {
-      href: 'https://360.articulate.com/review/content/73bf3afe-47f9-4f9f-aa4d-70bf27fbe8d5/review',
-      title: 'Mentor Training Module',
-      avatar: '',
-      description:
-        '',
-      content:
-        '',
-    },
-    {
-      href: 'mailto:mentor@villagebookbuilders.org',
-      title: 'Mentor Advisor Contact',
-      avatar: '',
-      description:
-        '',
-      content:
-        '',
-    },
-    {
-      href: 'https://docs.google.com/document/d/e/2PACX-1vR5-WnzhSJ88pfh2yctr7JuRXglAD55q8eluMPnLA1fTIyeKxxrGvL4r7D7wZh8mvd6WTL9GJJ1tkdD/pub',
-      title: 'Mentoring Guide',
-      avatar: '',
-      description:
-        '',
-      content:
-        '',
-    },
-    {
-      href: 'https://idroo.com/',
-      title: 'Whiteboard',
-      avatar: '',
-      description:
-        '',
-      content:
-        '',
-    },
-    {
-      href: 'https://www.khanacademy.org/',
-      title: 'Khan Academy',
-      avatar: '',
-      description:
-        '',
-      content:
-        '',
-    },
-    {
-      href: 'https://classroom.google.com/u/0/h',
-      title: 'Google Classroom',
-      avatar: '',
-      description:
-        '',
-      content:
-        '',
-    },
-    {
-      href: 'https://www.facebook.com/groups/villagementors',
-      title: 'VBB Mentors Facebook Group',
-      avatar: '',
-      description:
-        '',
-      content:
-        '',
-    },
-    {
-      href: 'https://apps.google.com/meet/',
-      title: 'Google Meet',
-      avatar: '',
-      description:
-        '',
-      content:
-        '',
-    },
-    {
-      href: 'https://www.facebook.com/VillageBookBuilders',
-      title: 'VBB Facebook Page',
-      avatar: '',
-      description:
-        '',
-      content:
-        '',
-    },
-    {
-      href: 'https://www.villagebookbuilders.org/',
-      title: 'VBB Website',
-      avatar: '',
-      description:
-        '',
-      content:
-        '',
-    }
-  ];
+  const { Meta } = Card;
 
   return (
     <div>
@@ -131,9 +39,168 @@ const Dashboard = () => {
             </div>
       {/* <MentorProfile /> */}
       <h1>Resources</h1>
+      <div>
+          <Row gutter={16}>
+            <Col span={8}>
+              <a href=''></a>
+              <Card
+                style={{ width: 300 }}
+                cover={
+                  <img
+                    alt="Articulate logo"
+                    src={}
+                  />
+                }
+              >
+                <Meta
+                  title="Mentor Training"
+                  description="Access your training modules here."
+                />
+              </Card>,
+            </Col>
+            <Col span={8}>
+            <Card
+                style={{ width: 300 }}
+                cover={
+                  <img
+                    alt='Village Book Builders logo'
+                    src={}
+                  />
+                }
+              >
+                <Meta
+                  title="Mentor Advisor"
+                  description="Contact your mentor advisor."
+                />
+              </Card>,
+            </Col>
+            <Col span={8}>
+            <a href='https://docs.google.com/document/d/e/2PACX-1vR5-WnzhSJ88pfh2yctr7JuRXglAD55q8eluMPnLA1fTIyeKxxrGvL4r7D7wZh8mvd6WTL9GJJ1tkdD/pub'></a>
+            <Card
+                style={{ width: 300 }}
+                cover={
+                  <img
+                  alt=""
+                  src={}
+                />
+                }
+              >
+                <Meta
+                  title="Mentoring Guide"
+                  description=""
+                />
+              </Card>,
+              <a href='https://idroo.com/'></a>
+              <Card
+                style={{ width: 300 }}
+                cover={
+                  <img
+                  alt=""
+                  src={}
+                  />
+                }
+              >
+                <Meta
+                  title="Whiteboard"
+                  description=""
+                />
+              </Card>,
+              <a href='https://www.khanacademy.org/'></a>
+              <Card
+                style={{ width: 300 }}
+                cover={
+                  <img
+                  alt=""
+                  src={}
+                />
+                }
+              >
+                <Meta
+                  title="Khan Academy"
+                  description=""
+                />
+              </Card>,
+              <a href='https://classroom.google.com/u/0/h'></a>
+              <Card
+                style={{ width: 300 }}
+                cover={
+                  <img
+                  alt=""
+                  src={}
+                  />
+                }
+              >
+                <Meta
+                  title="Google Classroom"
+                  description=""
+                />
+              </Card>,
+              <a href='https://apps.google.com/meet/'></a>
+              <Card
+                style={{ width: 300 }}
+                cover={
+                  <img
+                  alt=""
+                  src={}
+                  />
+                }
+              >
+                <Meta
+                  title="Google Meet"
+                  description=""
+                />
+              </Card>,
+              <a href='https://www.facebook.com/groups/villagementors'></a>
+              <Card
+                style={{ width: 300 }}
+                cover={
+                  <img
+                  alt=""
+                  src={}
+                  />
+                }
+              >
+                <Meta
+                  title="VBB Mentors Facebook Group"
+                  description=""
+                />
+              </Card>,
+              <a href='https://www.facebook.com/VillageBookBuilders'></a>
+              <Card
+                style={{ width: 300 }}
+                cover={
+                  <img
+                  alt=""
+                  src={}
+                  />
+                }
+              >
+                <Meta
+                  title="VBB Facebook Page"
+                  description=""
+                />
+              </Card>,
+              <a href='https://www.villagebookbuilders.org/'></a>
+              <Card
+                style={{ width: 300 }}
+                cover={
+                  <img
+                  alt=""
+                  src={}
+                  />
+                }
+              >
+                <Meta
+                  title="VBB Website Home"
+                  description=""
+                />
+              </Card>,
+            </Col>
+          </Row>
+        </div>,
       <p>
         If you would like to change a mentoring session or have any mentoring-related questions, please
-        <a 
+        <a
         href="mailto:mentor@villagebookbuilders.org"
         style={{ marginLeft: '5px' }}
         >
