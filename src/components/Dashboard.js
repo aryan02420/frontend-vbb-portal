@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import * as actions from '../redux/actions';
 import { Card, Col, Row, Button, Alert } from 'antd';
 
 import articulate from '../images/articulate-icon.png';
@@ -10,9 +11,7 @@ import facebook from '../images/facebook-icon.png';
 import idroo from '../images/idroo-icon.png';
 import khan from '../images/khan-icon.jpg';
 
-// import MentorProfile from "./MentorProfile";
-
-const Dashboard = () => {
+const Dashboard = ({ getSessionInfo }) => {
 
   const { Meta } = Card;
 
@@ -209,38 +208,7 @@ const Dashboard = () => {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    token: state.authToken,
-  };
+  return { token: state.authToken };
 };
 
-export default connect(mapStateToProps)(Dashboard);
-
-
-// state = {
-//   sessionslots: [],
-// };
-
-// fetchSessionSlotData = () => {
-//   axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
-//   axios.defaults.xsrfCookieName = 'csrftoken';
-//   axios.defaults.headers = {
-//     'Content-Type': 'application/json',
-//     Authorization: `Token ${this.props.token}`,
-//   };
-//   axios
-//     .get('http://127.0.0.1:8000/api/session/')
-//     .then((res) => {
-//       this.setState({
-//         sessionslots: res.data,
-//       });
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       alert('There was an error in retrieving your mentoring sessions', err);
-//     });
-// };
-
-// componentDidMount() {
-//   this.fetchSessionSlotData();
-// }
+export default connect(mapStateToProps, actions)(Dashboard);
