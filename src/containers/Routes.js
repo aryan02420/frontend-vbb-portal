@@ -17,7 +17,7 @@ const Routes = () => {
         <Route exact path="/register/">
           <TempRegistration />
         </Route>
-        <Route exact path="/">
+        <Route exact path="/dashboard">
           <Dashboard />
         </Route>
         <PrivateRoute exact path="/booking/">
