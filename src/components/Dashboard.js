@@ -59,7 +59,7 @@ const Dashboard = () => {
       <h1>Resources</h1>
       <div>
           <Row>
-            <Col span={6}>
+            <Col sm={12} md={12} lg={6} xl={6}>
               <a href=''></a>
               <Card
                 style={{ width: 200 }}
@@ -76,7 +76,7 @@ const Dashboard = () => {
                 />
               </Card>,
             </Col>
-            <Col span={6}>
+            <Col sm={12} md={12} lg={6} xl={6}>
               <a href='https://docs.google.com/document/d/e/2PACX-1vR5-WnzhSJ88pfh2yctr7JuRXglAD55q8eluMPnLA1fTIyeKxxrGvL4r7D7wZh8mvd6WTL9GJJ1tkdD/pub'></a>
               <Card
                   style={{ width: 200 }}
@@ -93,7 +93,7 @@ const Dashboard = () => {
                   />
                 </Card>,
               </Col>
-              <Col span={6}>
+              <Col sm={12} md={12} lg={6} xl={6}>
                 <a href='https://idroo.com/'></a>
                 <Card
                   style={{ width: 200 }}
@@ -110,7 +110,7 @@ const Dashboard = () => {
                   />
                 </Card>,
               </Col>
-              <Col span={6}>
+              <Col sm={12} md={12} lg={6} xl={6}>
                 <a href='https://www.khanacademy.org/'></a>
                 <Card
                   style={{ width: 200 }}
@@ -127,7 +127,7 @@ const Dashboard = () => {
                   />
                 </Card>,
               </Col>
-              <Col span={6}>
+              <Col sm={12} md={12} lg={6} xl={6}>
                 <a href='https://classroom.google.com/u/0/h'></a>
                 <Card
                   style={{ width: 200 }}
@@ -144,7 +144,7 @@ const Dashboard = () => {
                   />
                 </Card>,
               </Col>
-              <Col span={6}>
+              <Col sm={12} md={12} lg={6} xl={6}>
                 <a href='https://apps.google.com/meet/'></a>
                 <Card
                   style={{ width: 200 }}
@@ -161,7 +161,7 @@ const Dashboard = () => {
                   />
                 </Card>,
               </Col>
-              <Col span={6}>
+              <Col sm={12} md={12} lg={6} xl={6}>
                 <a href='https://www.facebook.com/groups/villagementors'></a>
                 <Card
                   style={{ width: 200 }}
