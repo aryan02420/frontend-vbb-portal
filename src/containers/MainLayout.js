@@ -24,9 +24,6 @@ const MainLayout = () => {
             <Breadcrumb.Item>
               <Link to="/signup">Mentor Registration</Link>
             </Breadcrumb.Item>
-            <Breadcrumb.Item>
-              <Link to="/dashboard">Mentor Dashboard</Link>
-            </Breadcrumb.Item>
           </Breadcrumb>
           <div style={{ padding: 24, minHeight: 380 }}>
             <Routes />
