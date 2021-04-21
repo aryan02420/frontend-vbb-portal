@@ -2,6 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Card, Col, Row, Button } from 'antd';
 
+import articulate from '../images/articulate.png';
+import meet from '../images/meet.jpg';
+import classroom from '../images/classroom.jpg';
+import village from '../images/vbb-picture-logo.png';
+import facebook from '../images/facebook.png';
+import idroo from '../images/idroo.png';
+import khan from '../images/khan.png';
+
 // import MentorProfile from "./MentorProfile";
 
 const Dashboard = () => {
@@ -48,7 +56,7 @@ const Dashboard = () => {
                 cover={
                   <img
                     alt="Articulate logo"
-                    src={}
+                    src={articulate}
                   />
                 }
               >
@@ -64,7 +72,7 @@ const Dashboard = () => {
                 cover={
                   <img
                     alt='Village Book Builders logo'
-                    src={}
+                    src={village}
                   />
                 }
               >
@@ -80,8 +88,8 @@ const Dashboard = () => {
                 style={{ width: 300 }}
                 cover={
                   <img
-                  alt=""
-                  src={}
+                  alt="Village Book Builders logo"
+                  src={village}
                 />
                 }
               >
@@ -96,7 +104,7 @@ const Dashboard = () => {
                 cover={
                   <img
                   alt=""
-                  src={}
+                  src={idroo}
                   />
                 }
               >
@@ -111,7 +119,7 @@ const Dashboard = () => {
                 cover={
                   <img
                   alt=""
-                  src={}
+                  src={khan}
                 />
                 }
               >
@@ -126,7 +134,7 @@ const Dashboard = () => {
                 cover={
                   <img
                   alt=""
-                  src={}
+                  src={classroom}
                   />
                 }
               >
@@ -141,7 +149,7 @@ const Dashboard = () => {
                 cover={
                   <img
                   alt=""
-                  src={}
+                  src={meet}
                   />
                 }
               >
@@ -156,7 +164,7 @@ const Dashboard = () => {
                 cover={
                   <img
                   alt=""
-                  src={}
+                  src={facebook}
                   />
                 }
               >
@@ -171,7 +179,7 @@ const Dashboard = () => {
                 cover={
                   <img
                   alt=""
-                  src={}
+                  src={facebook}
                   />
                 }
               >
@@ -186,7 +194,7 @@ const Dashboard = () => {
                 cover={
                   <img
                   alt=""
-                  src={}
+                  src={village}
                   />
                 }
               >
