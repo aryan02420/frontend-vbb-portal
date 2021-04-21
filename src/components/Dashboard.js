@@ -195,7 +195,7 @@ const Dashboard = ({ getSessionInfo }) => {
                     }
                   >
                     <Meta
-                      title="VBB Mentors Group"
+                      title="VBB Mentors"
                       description="Join the Village Book Builders mentor Facebook group."
                     />
                   </Card>,
