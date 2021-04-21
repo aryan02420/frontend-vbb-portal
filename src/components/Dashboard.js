@@ -44,12 +44,22 @@ const Dashboard = () => {
               >
                 View Your Calendar
               </Button>
+              <p>
+                If you would like to change a mentoring session or have any mentoring-related questions, please
+                <a
+                href="mailto:mentor@villagebookbuilders.org"
+                style={{ marginLeft: '5px' }}
+                >
+                  contact your mentor advisor
+                </a>
+                .
+              </p>
             </div>
       {/* <MentorProfile /> */}
       <h1>Resources</h1>
       <div>
-          <Row gutter={16}>
-            <Col span={8}>
+          <Row>
+            <Col span={6}>
               <a href=''></a>
               <Card
                 style={{ width: 200 }}
@@ -66,23 +76,7 @@ const Dashboard = () => {
                 />
               </Card>,
             </Col>
-            <Col span={8}>
-            <Card
-                style={{ width: 200 }}
-                cover={
-                  <img
-                    alt='Village Book Builders logo'
-                    src={village}
-                  />
-                }
-              >
-                <Meta
-                  title="Mentor Advisor"
-                  description="Contact your mentor advisor."
-                />
-              </Card>,
-            </Col>
-            <Col span={8}>
+            <Col span={6}>
               <a href='https://docs.google.com/document/d/e/2PACX-1vR5-WnzhSJ88pfh2yctr7JuRXglAD55q8eluMPnLA1fTIyeKxxrGvL4r7D7wZh8mvd6WTL9GJJ1tkdD/pub'></a>
               <Card
                   style={{ width: 200 }}
@@ -95,141 +89,97 @@ const Dashboard = () => {
                 >
                   <Meta
                     title="Mentoring Guide"
-                    description=""
+                    description="View the Village Book Builders mentor guide."
                   />
                 </Card>,
               </Col>
-              <Col span={8}>
+              <Col span={6}>
                 <a href='https://idroo.com/'></a>
                 <Card
                   style={{ width: 200 }}
                   cover={
                     <img
-                    alt=""
+                    alt="IDroo logo"
                     src={idroo}
                     />
                   }
                 >
                   <Meta
                     title="Whiteboard"
-                    description=""
+                    description="Whiteboard during your mentoring session."
                   />
                 </Card>,
               </Col>
-              <Col span={8}>
+              <Col span={6}>
                 <a href='https://www.khanacademy.org/'></a>
                 <Card
                   style={{ width: 200 }}
                   cover={
                     <img
-                    alt=""
+                    alt="Khan Academy logo"
                     src={khan}
                   />
                   }
                 >
                   <Meta
                     title="Khan Academy"
-                    description=""
+                    description="Leverage online courses and lesson material."
                   />
                 </Card>,
               </Col>
-              <Col span={8}>
+              <Col span={6}>
                 <a href='https://classroom.google.com/u/0/h'></a>
                 <Card
                   style={{ width: 200 }}
                   cover={
                     <img
-                    alt=""
+                    alt="Google classroom logo"
                     src={classroom}
                     />
                   }
                 >
                   <Meta
                     title="Google Classroom"
-                    description=""
+                    description="Organize student work."
                   />
                 </Card>,
               </Col>
-              <Col span={8}>
+              <Col span={6}>
                 <a href='https://apps.google.com/meet/'></a>
                 <Card
                   style={{ width: 200 }}
                   cover={
                     <img
-                    alt=""
+                    alt="Google Meet logo"
                     src={meet}
                     />
                   }
                 >
                   <Meta
                     title="Google Meet"
-                    description=""
+                    description="Meet with your mentee."
                   />
                 </Card>,
               </Col>
-              <Col span={8}>
+              <Col span={6}>
                 <a href='https://www.facebook.com/groups/villagementors'></a>
                 <Card
                   style={{ width: 200 }}
                   cover={
                     <img
-                    alt=""
+                    alt="Facebook logo"
                     src={facebook}
                     />
                   }
                 >
                   <Meta
-                    title="VBB Mentors Facebook Group"
-                    description=""
-                  />
-                </Card>,
-              </Col>
-              <Col span={8}>
-                <a href='https://www.facebook.com/VillageBookBuilders'></a>
-                <Card
-                  style={{ width: 200 }}
-                  cover={
-                    <img
-                    alt=""
-                    src={facebook}
-                    />
-                  }
-                >
-                  <Meta
-                    title="VBB Facebook Page"
-                    description=""
-                  />
-                </Card>,
-              </Col>
-              <Col span={8}>
-                <a href='https://www.villagebookbuilders.org/'></a>
-                <Card
-                  style={{ width: 200 }}
-                  cover={
-                    <img
-                    alt=""
-                    src={village}
-                    />
-                  }
-                >
-                  <Meta
-                    title="VBB Website Home"
-                    description=""
+                    title="VBB Mentors Group"
+                    description="Join the Village Book Builders mentor Facebook group."
                   />
                 </Card>,
               </Col>
           </Row>
-        </div>,
-      <p>
-        If you would like to change a mentoring session or have any mentoring-related questions, please
-        <a
-        href="mailto:mentor@villagebookbuilders.org"
-        style={{ marginLeft: '5px' }}
-        >
-          contact your mentor advisor
-        </a>
-        .
-      </p>
+        </div>
     </div>
   )
 }
