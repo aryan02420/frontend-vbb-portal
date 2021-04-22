@@ -107,6 +107,7 @@ const HomeSignin = ({
         </Form.Item> */}
         <Form.Item>
           <Button
+            href="/"
             type="primary"
             htmlType="button"
             onClick={() => {

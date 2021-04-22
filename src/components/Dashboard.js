@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../redux/actions';
 import { Card, Col, Row, Button, Alert } from 'antd';
@@ -11,13 +11,19 @@ import facebook from '../images/facebook-icon.png';
 import idroo from '../images/idroo-icon.png';
 import khan from '../images/khan-icon.jpg';
 
-const Dashboard = ({ getSessionInfo }) => {
+const Dashboard = ({ getSessionInfo, user }) => {
 
   const { Meta } = Card;
 
   const onClose = (e) => {
     console.log(e, 'Alert was closed.');
   };
+
+  useEffect (() => {
+    if (user.externalId) {
+      getSessionInfo(user.externalId)
+    }
+  },[user])
 
   return (
     <div>
@@ -208,7 +214,10 @@ const Dashboard = ({ getSessionInfo }) => {
 }
 
 const mapStateToProps = (state) => {
-  return { token: state.authToken };
+  return {
+  token: state.authToken,
+  user: state.user
+  };
 };
 
 export default connect(mapStateToProps, actions)(Dashboard);
