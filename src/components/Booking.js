@@ -6,6 +6,10 @@ import 'moment-timezone';
 
 import menteeComputer from '../images/vbb-mentee-computer.png';
 
+import * as actionCreators from '../redux/Booking.redux/Booking.action';
+
+// import { mentorChange, commitChange } from '../redux/Booking.redux/Booking.action';
+
 class Booking extends React.Component {
   state = {
     libraries: [], // async
@@ -27,6 +31,8 @@ class Booking extends React.Component {
     this.fetchBookingData();
   }
 
+
+  // working on async actions
   fetchBookingData = () => {
     axios
       .get('http://127.0.0.1:8000/api/library/')
@@ -408,8 +414,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleMentorChange: () => dispatch({type: 'MENTOR'}),
-    handleCommitChange: () => dispatch({type: 'COMMITE'}),
+    handleMentorChange: () => dispatch(actionCreators.mentorChange()),
+    handleCommitChange: () => dispatch(actionCreators.commitChange()),
   }
 }
 
