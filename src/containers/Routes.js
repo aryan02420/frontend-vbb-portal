@@ -14,6 +14,9 @@ const Routes = () => {
   return (
     <div className="App">
       <Switch>
+        <Route exact path="/test-booking/">
+          <Booking />
+        </Route>
         <Route exact path="/register/">
           <TempRegistration />
         </Route>
@@ -23,7 +26,7 @@ const Routes = () => {
         <PrivateRoute exact path="/booking/">
           <Booking />
         </PrivateRoute>
-        <Route exact path="/signin/" >
+        <Route exact path="/signin/">
           <HomeSignin />
         </Route>
         <Route exact path="/signup/">
