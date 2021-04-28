@@ -11,77 +11,64 @@ import * as actionCreators from '../redux/Booking.redux/Booking.action';
 // import { mentorChange, commitChange } from '../redux/Booking.redux/Booking.action';
 
 class Booking extends React.Component {
-  state = {
-    libraries: [], // async
-    languages: {}, // async
-    times: [], // async
-  //   time_zone: moment.tz.guess(), 
-  // language: 1,
-  //   weekday: 0, 
-  //   displayDay: '',
-  // library: 0, /
-  //   time: false,
-  //   displayTime: '',
-  //   isReturning: true,
-  //   isCommitted: false,
-  //   sameAppointment: 'no',
-  };
 
   componentDidMount() {
-    this.fetchBookingData();
+    this.props.getBookingData();
+    this.props.getTimes();
+    // this.fetchBookingData();
+    // this.fetchTimes();
   }
 
-
   // working on async actions
-  fetchBookingData = () => {
-    axios
-      .get('http://127.0.0.1:8000/api/library/')
-      .then((res) => {
-        this.setState({
-          libraries: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    axios
-      .get('http://127.0.0.1:8000/api/language/')
-      .then((res) => {
-        this.setState({
-          languages: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    this.fetchTimes();
-  };
+  // fetchBookingData = () => {
+    // axios
+    //   .get('http://127.0.0.1:8000/api/library/')
+    //   .then((res) => {
+    //     this.setState({
+    //       libraries: res.data,
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    // axios
+    //   .get('http://127.0.0.1:8000/api/language/')
+    //   .then((res) => {
+    //     this.setState({
+    //       languages: res.data,
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    // this.fetchTimes();
+  // };
 
-  fetchTimes = () => {
-    axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
-    axios.defaults.xsrfCookieName = 'csrftoken';
-    axios.defaults.headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Token ${this.props.token}`,
-    };
-    axios
-      .get('http://127.0.0.1:8000/api/available/', {
-        params: {
-          library: this.props.library,
-          language: this.props.language,
-          min_msm: this.shift_time(parseInt(this.props.weekday), false),
-          max_msm: this.shift_time(parseInt(this.props.weekday), false) + 1440,
-        },
-      })
-      .then((res) => {
-        this.setState({
-          times: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // fetchTimes = () => {
+  //   axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
+  //   axios.defaults.xsrfCookieName = 'csrftoken';
+  //   axios.defaults.headers = {
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Token ${this.props.token}`,
+  //   };
+  //   axios
+  //     .get('http://127.0.0.1:8000/api/available/', {
+  //       params: {
+  //         library: this.props.library,
+  //         language: this.props.language,
+  //         min_msm: this.shift_time(parseInt(this.props.weekday), false),
+  //         max_msm: this.shift_time(parseInt(this.props.weekday), false) + 1440,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       this.setState({
+  //         times: res.data,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   display_day = (day) => {
     day = parseInt(day);
@@ -163,7 +150,7 @@ class Booking extends React.Component {
   };
 
   submitRequest = () => {
-    this.props.handleCommitChange(); // modify
+    this.props.handleCommitChange(); // modified
     this.postRequest();
   };
 
@@ -218,9 +205,9 @@ class Booking extends React.Component {
               id="language"
               onChange={this.handleDropDownChange}
             >
-              {this.state.languages &&
-                this.state.languages.length > 0 &&
-                this.state.languages.map((lang) => {
+              {this.props.languages &&
+                this.props.languages.length > 0 &&
+                this.props.languages.map((lang) => {
                   return (
                     <option key={lang.id} value={lang.id}>
                       {lang.name}
@@ -269,9 +256,9 @@ class Booking extends React.Component {
                   style={{ marginTop: '0px' }}
                 >
                   <option value="0">Select from Available Libraries:</option>
-                  {this.state.libraries &&
-                    this.state.libraries.length > 0 &&
-                    this.state.libraries.map((lib) => {
+                  {this.props.libraries &&
+                    this.props.libraries.length > 0 &&
+                    this.props.libraries.map((lib) => {
                       return (
                         <option key={lib.id} value={lib.id}>
                           {lib.name}
@@ -303,9 +290,9 @@ class Booking extends React.Component {
             <label htmlFor="time">Time of Day:&nbsp;</label>
             <select name="time" id="time" onChange={this.handleDropDownChange}>
               <option value={false}>Select from Avaliable Times:</option>
-              {this.state.times &&
-                this.state.times.length > 0 &&
-                this.state.times.map((time) => {
+              {this.props.times &&
+                this.props.times.length > 0 &&
+                this.props.times.map((time) => {
                   return (
                     <option key={time.msm} value={time.msm}>
                       {this.display_time(time.msm)}
@@ -400,6 +387,10 @@ class Booking extends React.Component {
 const mapStateToProps = (state) => {
   return {
     token: state.authToken,
+    libraries: state.booking.libraries, // async
+    languages: state.booking.language, // async
+    times: state.booking.times, // async
+    time_zone: state.booking.time_zone, 
     language: state.booking.language,
     weekday: state.booking.weekday,
     displayDay: state.booking.displayDay,
@@ -416,6 +407,8 @@ const mapDispatchToProps = dispatch => {
   return {
     handleMentorChange: () => dispatch(actionCreators.mentorChange()),
     handleCommitChange: () => dispatch(actionCreators.commitChange()),
+    getBookingData: () => dispatch(actionCreators.getBookingData()),
+    getTimes: () => dispatch(actionCreators.getTimes()),
   }
 }
 
