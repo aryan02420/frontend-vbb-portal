@@ -40,31 +40,11 @@ export const setTimeInBooking = (time) => {
   }
 }
 
-// async action
-// export const fetchBookingData = () => async (dispatch) =>
-// {
-
-//         const response = await axios.get('http://127.0.0.1:8000/api/library/')
-//         .then( res => {
-//             setLibraries(res.data)
-//         })
-//         .catch( err => {
-//             console.log(err);
-//         });
-//         axios.get('http://127.0.0.1:8000/api/language/')
-//         .then( res => {
-//             setLanguages(res.data)
-//         })
-//         .catch( err => {
-//             console.log(err);
-//         });
-
-// }
-
 /**
  * Gets the Library and Language from the API and adds it to the bookings store
  * @returns void or error
  */
+
  export const getBookingData = () => async (dispatch, getState) => {
     const authToken = getState().authToken;
     try {

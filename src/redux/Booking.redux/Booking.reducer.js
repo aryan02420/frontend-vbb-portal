@@ -15,10 +15,11 @@ const BookingInitialState = {
     displayTime: '',
     isReturning: true, // 1
     isCommitted: false,
-    sameAppointment: 'no',
+    sameAppointment: 'no'
 };
 
 export const booking = (state = BookingInitialState, action) => {
+  //this needs to use the payload in someway
   switch (action.type) {
     case actionTypes.MENTOR_CHANGE:
         let newLibrary = state.library
