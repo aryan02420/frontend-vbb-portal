@@ -12,6 +12,7 @@ import TempRegistration from '../components/registration/TempRegistration';
 
 const Routes = ({token}) => {
   const isLoggedIn = true;
+
   return (
     <div className="App">
       <Route exact path="/register/">
