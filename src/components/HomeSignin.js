@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import * as actions from '../redux/actions';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import Logo from '../images/vbb-picture-logo.png';
 
@@ -105,17 +105,16 @@ const HomeSignin = ({
             Forgot password
           </a>
         </Form.Item> */}
-        <Form.Item>
           <Button
             type="primary"
             htmlType="button"
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               logInEmailPassword(history);
             }}
           >
             Log In
           </Button>
-        </Form.Item>
         {/* GoogleLogin commented out for ease of local development until production ready */}
         {/* <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
@@ -137,4 +136,4 @@ const mapStateToProps = (state) => {
   return { registrationForm: state.registrationForm };
 };
 
-export default connect(mapStateToProps, actions)(HomeSignin);
+export default withRouter(connect(mapStateToProps, actions)(HomeSignin));

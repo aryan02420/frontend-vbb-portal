@@ -38,11 +38,11 @@ export const setSessionEndDate = (endDate) => {
  * endpoint: /session/:id
  * @param {string} sessionId
  */
-export const getSessionInfo = (sessionId) => async (dispatch, getState) => {
+export const getSessionInfo = (userExternalId) => async (dispatch, getState) => {
   dispatch(setLoading());
   try {
     const token = getState().authToken;
-    const url = PYTHON_API + 'v1/session/' + sessionId;
+    const url = PYTHON_API + 'v1/session/' + userExternalId;
 
     const headers = {
       'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ export const getSessionInfo = (sessionId) => async (dispatch, getState) => {
     const responseData = await axios.get({ url, headers }).data;
 
     dispatch(setLoadingFalse());
-
+    debugger
     const newSession = {
       id: responseData.id,
       display: responseData.display,
