@@ -11,8 +11,8 @@ import SessionDetails from '../components/SessionDetails';
 import Donation from '../components/registration/Donation';
 import TempRegistration from '../components/registration/TempRegistration';
 
-const Routes = () => {
-
+const Routes = ({token}) => {
+  const isLoggedIn = !!token
   return (
     <div className="App">
       <Switch>
