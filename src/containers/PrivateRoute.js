@@ -6,6 +6,7 @@ import Spinner from 'react-bootstrap/Spinner';
 const PrivateRoute = ({ component: Component, token, loading }) => (
   <Route
     render={() => {
+      console.log({token});
       if (loading) {
         return (
           <Spinner
