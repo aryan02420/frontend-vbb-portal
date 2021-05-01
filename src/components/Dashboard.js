@@ -25,6 +25,8 @@ const Dashboard = ({ getSessionInfo, user }) => {
   //   }
   // },[user])
 
+  //Todo: Temporarily make and empty sessionslot array in the store
+
   return (
     <div>
       <h1>
