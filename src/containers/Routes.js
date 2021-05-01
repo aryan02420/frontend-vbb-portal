@@ -22,22 +22,15 @@ const Routes = ({token}) => {
           isLoggedIn ? <Dashboard {...routerProps}/> : <Redirect to='/signin' />
         }
       />
-      <Route exact path="/booking/">
-        <Booking />
-      </Route>
-      <Route exact path="/signin/" render={(routerProps) =>
-        <HomeSignin {...routerProps}/>
-      }
+      <Route exact path="/booking/"
+        render={(routerProps) =>
+          isLoggedIn ? <Booking {...routerProps}/> : <Redirect to='/signin' />
+        }
       />
-      <Route exact path="/signup/">
-        <MasterForm />
-      </Route>
-      <Route exact path="/sessiondetails/:sessionid/">
-        <SessionDetails />
-      </Route>
-      <Route exact path="/donate/">
-        <Donation />
-      </Route>
+      <Route exact path="/signin/" render={HomeSignin}/>
+      <Route exact path="/signup/" render={MasterForm}/>
+      <Route exact path="/sessiondetails/:sessionid/" render={SessionDetails}/>
+      <Route exact path="/donate/" render={Donation}/>
     </div>
   );
 };
