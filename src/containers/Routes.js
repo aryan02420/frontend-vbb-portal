@@ -1,8 +1,7 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import PrivateRoute from './PrivateRoute';
 import Booking from '../components/Booking';
 import Dashboard from '../components/Dashboard';
 import MasterForm from '../components/registration/MasterForm';
@@ -12,32 +11,33 @@ import Donation from '../components/registration/Donation';
 import TempRegistration from '../components/registration/TempRegistration';
 
 const Routes = ({token}) => {
-  const isLoggedIn = !!token
+  const isLoggedIn = true;
   return (
     <div className="App">
-      <Switch>
-        <Route exact path="/register/">
-          <TempRegistration />
-        </Route>
-        <Route exact path="/">
-          <Dashboard />
-        </Route>
-        <PrivateRoute exact path="/booking/">
-          <Booking />
-        </PrivateRoute>
-        <Route exact path="/signin/" >
-          <HomeSignin />
-        </Route>
-        <Route exact path="/signup/">
-          <MasterForm />
-        </Route>
-        <Route exact path="/sessiondetails/:sessionid/">
-          <SessionDetails />
-        </Route>
-        <Route exact path="/donate/">
-          <Donation />
-        </Route>
-      </Switch>
+      <Route exact path="/register/">
+        <TempRegistration />
+      </Route>
+      <Route exact path="/"
+        render={(routerProps) =>
+          isLoggedIn ? <Dashboard {...routerProps}/> : <Redirect to='/signin' />
+        }
+      />
+      <Route exact path="/booking/">
+        <Booking />
+      </Route>
+      <Route exact path="/signin/" render={(routerProps) =>
+        <HomeSignin {...routerProps}/>
+      }
+      />
+      <Route exact path="/signup/">
+        <MasterForm />
+      </Route>
+      <Route exact path="/sessiondetails/:sessionid/">
+        <SessionDetails />
+      </Route>
+      <Route exact path="/donate/">
+        <Donation />
+      </Route>
     </div>
   );
 };
@@ -46,4 +46,4 @@ const mapStateToProps = (state) => {
   return {token: state.authToken}
 }
 
-export default connect(mapStateToProps)(Routes);
+export default connect(mapStateToProps, null)(Routes);

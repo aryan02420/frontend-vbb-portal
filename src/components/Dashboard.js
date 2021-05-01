@@ -19,11 +19,11 @@ const Dashboard = ({ getSessionInfo, user }) => {
     console.log(e, 'Alert was closed.');
   };
 
-  useEffect (() => {
-    if (user.externalId) {
-      getSessionInfo(user.externalId)
-    }
-  },[user])
+  // useEffect (() => {
+  //   if (user.externalId) {
+  //     getSessionInfo(user.externalId)
+  //   }
+  // },[user])
 
   return (
     <div>

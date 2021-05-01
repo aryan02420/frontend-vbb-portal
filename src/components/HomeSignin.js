@@ -59,10 +59,10 @@ const HomeSignin = ({
             alignItems: 'center',
           }}
         >
-          <Form.Item
-            label="Email"
+          {/* <Form.Item */}
+            {/* label="Email"
             rules={[{ required: true, message: 'Email is required.' }]}
-          >
+          > */}
             <Input
               prefix={<UserOutlined />}
               type="text"
@@ -75,11 +75,11 @@ const HomeSignin = ({
                 setRegistrationForm(updatedRegForm);
               }}
             />
-          </Form.Item>
-          <Form.Item
-            label="Password"
+          {/* </Form.Item> */}
+          {/* <Form.Item */}
+            {/* label="Password"
             rules={[{ required: true, message: 'Password is required.' }]}
-          >
+          > */}
             <Input.Password
               prefix={<LockOutlined />}
               type="password"
@@ -95,7 +95,7 @@ const HomeSignin = ({
                 visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
               }
             />
-          </Form.Item>
+          {/* </Form.Item> */}
         </div>
         {/* <Form.Item>
           <Form.Item name="remember" valuePropName="checked" noStyle>
