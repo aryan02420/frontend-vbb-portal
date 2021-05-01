@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import PrivateRoute from './PrivateRoute';
 import Booking from '../components/Booking';
@@ -11,6 +12,7 @@ import Donation from '../components/registration/Donation';
 import TempRegistration from '../components/registration/TempRegistration';
 
 const Routes = () => {
+
   return (
     <div className="App">
       <Switch>
@@ -40,4 +42,8 @@ const Routes = () => {
   );
 };
 
-export default Routes;
+const mapStateToProps = (state) => {
+  return {token: state.authToken}
+}
+
+export default connect(mapStateToProps)(Routes);
