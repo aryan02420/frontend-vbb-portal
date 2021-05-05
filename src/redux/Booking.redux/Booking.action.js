@@ -3,6 +3,7 @@ import { PYTHON_API } from '../actions/index';
 
 export const MENTOR_CHANGE = 'MENTOR_CHANGE';
 export const COMMIT_CHANGE = 'COMMIT_CHANGE';
+export const DROPDOWN_CHANGE = 'DROPDOWN_CHANGE';
 export const SET_LIBRARIES = 'SET_LIBRARIES';
 export const SET_LANGUAGES = 'SET_LANGUAGES';
 export const SET_TIMES = 'SET_TIMES';
@@ -22,35 +23,44 @@ const fakeTimeData = {
 
 
 export const mentorChange = () => {
-    return {
-        typy: MENTOR_CHANGE
-    }
+  return {
+    type: MENTOR_CHANGE
+  }
 }
 
 export const commitChange = () => {
-    return {
-        typy: COMMIT_CHANGE
-    }
+  return {
+    type: COMMIT_CHANGE
+  }
+}
+
+export const dropDownChange = (name, value) => {
+  console.log(name)
+  console.log(value)
+  return {
+    type: DROPDOWN_CHANGE,
+    payload: { name, value }
+  }
 }
 
 export const setLibraryInBooking = (library) => {
-    return {
-        type: SET_LIBRARIES,
-        payload: library
-    }
+  return {
+    type: SET_LIBRARIES,
+    payload: library
+  }
 }
 
 export const setLanguageInBooking = (language) => {
-    return {
-        type: SET_LANGUAGES,
-        payload: language
-    }
+  return {
+    type: SET_LANGUAGES,
+    payload: language
+  }
 }
 
 export const setTimeInBooking = (time) => {
   return {
-      type: SET_TIMES,
-      payload: time
+    type: SET_TIMES,
+    payload: time
   }
 }
 
@@ -59,45 +69,10 @@ export const setTimeInBooking = (time) => {
  * @returns void or error
  */
 
- export const getBookingData = () => async (dispatch, getState) => {
-    console.log(fakeLanguageData.data)
-    console.log(fakeLibraryData.data)
+export const getBookingData = () => async (dispatch, getState) => {
+  console.log(fakeLanguageData.data)
+  console.log(fakeLibraryData.data)
 
-    const authToken = getState().authToken;
-    try {
-      //get user from backend
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
-      };
-    //   const getLibraryResponse = await axios.get(PYTHON_API + 'v1/library/', {
-    //     headers,
-    //   });
-      // const getLibraryResponse = await axios.get(
-      //   'http://127.0.0.1:8000/api/library/'
-      // );
-      // const getLanguageResponse = await axios.get(
-      //   'http://127.0.0.1:8000/api/language/'
-      // );
-
-      const getLanguageResponse = fakeLanguageData
-      const getLibraryResponse = fakeLibraryData
-
-      dispatch(setLanguageInBooking(getLanguageResponse.data));
-      dispatch(setLibraryInBooking(getLibraryResponse.data));
-
-    } catch (err) {
-      //manage what happens when things go wrong
-      console.log('Error in fetchBookingData', err);
-    }
-  };
-
-
-/**
- * Gets the Times from the API and adds it to the bookings store
- * @returns void or error
- */
- export const getTimes = () => async (dispatch, getState) => {
   const authToken = getState().authToken;
   try {
     //get user from backend
@@ -105,9 +80,44 @@ export const setTimeInBooking = (time) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${authToken}`,
     };
-  //   const getLibraryResponse = await axios.get(PYTHON_API + 'v1/library/', {
-  //     headers,
-  //   });
+    //   const getLibraryResponse = await axios.get(PYTHON_API + 'v1/library/', {
+    //     headers,
+    //   });
+    // const getLibraryResponse = await axios.get(
+    //   'http://127.0.0.1:8000/api/library/'
+    // );
+    // const getLanguageResponse = await axios.get(
+    //   'http://127.0.0.1:8000/api/language/'
+    // );
+
+    const getLanguageResponse = fakeLanguageData
+    const getLibraryResponse = fakeLibraryData
+
+    dispatch(setLanguageInBooking(getLanguageResponse.data));
+    dispatch(setLibraryInBooking(getLibraryResponse.data));
+
+  } catch (err) {
+    //manage what happens when things go wrong
+    console.log('Error in fetchBookingData', err);
+  }
+};
+
+
+/**
+ * Gets the Times from the API and adds it to the bookings store
+ * @returns void or error
+ */
+export const getTimes = () => async (dispatch, getState) => {
+  const authToken = getState().authToken;
+  try {
+    //get user from backend
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    };
+    //   const getLibraryResponse = await axios.get(PYTHON_API + 'v1/library/', {
+    //     headers,
+    //   });
     // const getTimeResponse = await axios.get(
     //   'http://127.0.0.1:8000/api/library/'
     // );
