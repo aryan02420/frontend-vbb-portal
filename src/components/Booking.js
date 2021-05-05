@@ -17,16 +17,16 @@ class Booking extends React.Component {
     this.props.getTimes();
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.language !== prevProps.language ||
-      this.props.time_zone !== prevProps.time_zone ||
-      this.props.library !== prevProps.library ||
-      this.props.weekday !== prevProps.weekday ||
-      this.props.sameAppointment !== prevProps.sameAppointment
-      ) {
-      this.props.getTimes()
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.language !== prevProps.language ||
+  //     this.props.time_zone !== prevProps.time_zone ||
+  //     this.props.library !== prevProps.library ||
+  //     this.props.weekday !== prevProps.weekday ||
+  //     this.props.sameAppointment !== prevProps.sameAppointment
+  //     ) {
+  //     this.props.getTimes()
+  //   }
+  // }
 
   display_day = (day) => {
     day = parseInt(day);
@@ -373,7 +373,7 @@ const mapDispatchToProps = dispatch => {
     handleCommitChange: () => dispatch(actionCreators.commitChange()),
     handleDropDownChange: (name, value) => dispatch(actionCreators.dropDownChange(name, value)),
     getBookingData: () => dispatch(actionCreators.getBookingData()),
-    getTimes: () => dispatch(actionCreators.getTimes()),
+    getTimes: () => dispatch(actionCreators.getTimes())
   }
 }
 

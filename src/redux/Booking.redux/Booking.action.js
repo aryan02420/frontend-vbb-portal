@@ -34,13 +34,16 @@ export const commitChange = () => {
   }
 }
 
-export const dropDownChange = (name, value) => {
-  console.log(name)
-  console.log(value)
+export const dropDown_Change = (name, value) => {
   return {
     type: DROPDOWN_CHANGE,
     payload: { name, value }
   }
+}
+
+export const dropDownChange = (name, value) => async (dispatch, getState) => {
+  dispatch(dropDown_Change(name, value))
+  dispatch(getTimes())
 }
 
 export const setLibraryInBooking = (library) => {
@@ -107,7 +110,7 @@ export const getBookingData = () => async (dispatch, getState) => {
  * Gets the Times from the API and adds it to the bookings store
  * @returns void or error
  */
-export const getTimes = () => async (dispatch, getState) => {
+export const getTimes = (e) => async (dispatch, getState) => {
   const authToken = getState().authToken;
   try {
     //get user from backend
