@@ -15,60 +15,7 @@ class Booking extends React.Component {
   componentDidMount() {
     this.props.getBookingData();
     this.props.getTimes();
-    // this.fetchBookingData();
-    // this.fetchTimes();
   }
-
-  // working on async actions
-  // fetchBookingData = () => {
-    // axios
-    //   .get('http://127.0.0.1:8000/api/library/')
-    //   .then((res) => {
-    //     this.setState({
-    //       libraries: res.data,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // axios
-    //   .get('http://127.0.0.1:8000/api/language/')
-    //   .then((res) => {
-    //     this.setState({
-    //       languages: res.data,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // this.fetchTimes();
-  // };
-
-  // fetchTimes = () => {
-  //   axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
-  //   axios.defaults.xsrfCookieName = 'csrftoken';
-  //   axios.defaults.headers = {
-  //     'Content-Type': 'application/json',
-  //     Authorization: `Token ${this.props.token}`,
-  //   };
-  //   axios
-  //     .get('http://127.0.0.1:8000/api/available/', {
-  //       params: {
-  //         library: this.props.library,
-  //         language: this.props.language,
-  //         min_msm: this.shift_time(parseInt(this.props.weekday), false),
-  //         max_msm: this.shift_time(parseInt(this.props.weekday), false) + 1440,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       this.setState({
-  //         times: res.data,
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 
   display_day = (day) => {
     day = parseInt(day);
@@ -144,9 +91,9 @@ class Booking extends React.Component {
     //newState["time"] = false; //FIXME make sure the time drop down is unselected so the user isn't confused.
     newState[e.target.name] = e.target.value;
     console.log(newState);
-    this.setState(newState, () => {
-      this.fetchTimes();
-    });
+    // this.setState(newState, () => {
+    //   this.fetchTimes();
+    // });
   };
 
   submitRequest = () => {
@@ -207,10 +154,10 @@ class Booking extends React.Component {
             >
               {this.props.languages &&
                 this.props.languages.length > 0 &&
-                this.props.languages.map((lang) => {
+                this.props.languages.map((lang, index) => {
                   return (
-                    <option key={lang.id} value={lang.id}>
-                      {lang.name}
+                    <option key={index}>
+                      {lang}
                     </option>
                   );
                 })}
@@ -255,13 +202,12 @@ class Booking extends React.Component {
                   onChange={this.handleDropDownChange}
                   style={{ marginTop: '0px' }}
                 >
-                  <option value="0">Select from Available Libraries:</option>
                   {this.props.libraries &&
                     this.props.libraries.length > 0 &&
-                    this.props.libraries.map((lib) => {
+                    this.props.libraries.map((lib, index) => {
                       return (
-                        <option key={lib.id} value={lib.id}>
-                          {lib.name}
+                        <option key={index}>
+                          {lib}
                         </option>
                       );
                     })}
@@ -289,14 +235,17 @@ class Booking extends React.Component {
             <br />
             <label htmlFor="time">Time of Day:&nbsp;</label>
             <select name="time" id="time" onChange={this.handleDropDownChange}>
-              <option value={false}>Select from Avaliable Times:</option>
+              {/* <option value={false}>Select from Avaliable Times:</option> */}
               {this.props.times &&
                 this.props.times.length > 0 &&
-                this.props.times.map((time) => {
+                this.props.times.map((time, index) => {
                   return (
-                    <option key={time.msm} value={time.msm}>
-                      {this.display_time(time.msm)}
-                    </option>
+                    // <option key={time.msm} value={time.msm}>
+                    //   {this.display_time(time.msm)}
+                    // </option>
+                    <option key={index}>
+                    {time}
+                  </option>
                   );
                 })}
             </select>
@@ -388,7 +337,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.authToken,
     libraries: state.booking.libraries, // async
-    languages: state.booking.language, // async
+    languages: state.booking.languages, // async
     times: state.booking.times, // async
     time_zone: state.booking.time_zone, 
     language: state.booking.language,

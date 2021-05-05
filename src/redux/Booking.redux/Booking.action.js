@@ -7,6 +7,20 @@ export const SET_LIBRARIES = 'SET_LIBRARIES';
 export const SET_LANGUAGES = 'SET_LANGUAGES';
 export const SET_TIMES = 'SET_TIMES';
 
+
+const fakeLanguageData = {
+  data: ['English', 'Spanish', 'French', 'German']
+}
+
+const fakeLibraryData = {
+  data: ['fake library1', 'fake library2', 'fake library3', 'fake library4']
+}
+
+const fakeTimeData = {
+  data: ['fake time1', 'fake time2', 'fake time3', 'fake time4']
+}
+
+
 export const mentorChange = () => {
     return {
         typy: MENTOR_CHANGE
@@ -46,6 +60,9 @@ export const setTimeInBooking = (time) => {
  */
 
  export const getBookingData = () => async (dispatch, getState) => {
+    console.log(fakeLanguageData.data)
+    console.log(fakeLibraryData.data)
+
     const authToken = getState().authToken;
     try {
       //get user from backend
@@ -56,15 +73,18 @@ export const setTimeInBooking = (time) => {
     //   const getLibraryResponse = await axios.get(PYTHON_API + 'v1/library/', {
     //     headers,
     //   });
-      const getLibraryResponse = await axios.get(
-        'http://127.0.0.1:8000/api/library/'
-      );
-      const getLanguageResponse = await axios.get(
-        'http://127.0.0.1:8000/api/language/'
-      );
+      // const getLibraryResponse = await axios.get(
+      //   'http://127.0.0.1:8000/api/library/'
+      // );
+      // const getLanguageResponse = await axios.get(
+      //   'http://127.0.0.1:8000/api/language/'
+      // );
 
-      dispatch(setLibraryInBooking(getLibraryResponse.data));
+      const getLanguageResponse = fakeLanguageData
+      const getLibraryResponse = fakeLibraryData
+
       dispatch(setLanguageInBooking(getLanguageResponse.data));
+      dispatch(setLibraryInBooking(getLibraryResponse.data));
 
     } catch (err) {
       //manage what happens when things go wrong
@@ -88,10 +108,9 @@ export const setTimeInBooking = (time) => {
   //   const getLibraryResponse = await axios.get(PYTHON_API + 'v1/library/', {
   //     headers,
   //   });
-    const getTimeResponse = await axios.get(
-      'http://127.0.0.1:8000/api/library/'
-    );
-
+    // const getTimeResponse = await axios.get(
+    //   'http://127.0.0.1:8000/api/library/'
+    // );
     // // need a given API to designate the params
     // params: {
     //   library: this.props.library,
@@ -99,6 +118,8 @@ export const setTimeInBooking = (time) => {
     //   min_msm: this.shift_time(parseInt(this.props.weekday), false),
     //   max_msm: this.shift_time(parseInt(this.props.weekday), false) + 1440,
     // }
+
+    const getTimeResponse = fakeTimeData
 
     dispatch(setTimeInBooking(getTimeResponse.data));
 

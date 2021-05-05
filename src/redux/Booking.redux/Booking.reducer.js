@@ -3,9 +3,9 @@ import 'moment-timezone';
 import * as actionTypes from './Booking.action';
 
 const BookingInitialState = {
-    libraries: [], // async
-    languages: {}, // async
-    times: [], // async
+    libraries: [], 
+    languages: [], 
+    times: [], 
     time_zone: moment.tz.guess(), 
     language: 1,
     weekday: 0, 
