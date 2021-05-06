@@ -4,6 +4,7 @@ import axios from 'axios';
 import moment from 'moment';
 import 'moment-timezone';
 
+//luxon npm package: https://www.npmjs.com/package/luxon
 import menteeComputer from '../images/vbb-mentee-computer.png';
 
 import * as actionCreators from '../redux/Booking.redux/Booking.action';
@@ -11,7 +12,6 @@ import * as actionCreators from '../redux/Booking.redux/Booking.action';
 // import { mentorChange, commitChange } from '../redux/Booking.redux/Booking.action';
 
 class Booking extends React.Component {
-
   componentDidMount() {
     this.props.getBookingData();
     this.props.getTimes();
@@ -21,27 +21,27 @@ class Booking extends React.Component {
 
   // working on async actions
   // fetchBookingData = () => {
-    // axios
-    //   .get('http://127.0.0.1:8000/api/library/')
-    //   .then((res) => {
-    //     this.setState({
-    //       libraries: res.data,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // axios
-    //   .get('http://127.0.0.1:8000/api/language/')
-    //   .then((res) => {
-    //     this.setState({
-    //       languages: res.data,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // this.fetchTimes();
+  // axios
+  //   .get('http://127.0.0.1:8000/api/library/')
+  //   .then((res) => {
+  //     this.setState({
+  //       libraries: res.data,
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+  // axios
+  //   .get('http://127.0.0.1:8000/api/language/')
+  //   .then((res) => {
+  //     this.setState({
+  //       languages: res.data,
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+  // this.fetchTimes();
   // };
 
   // fetchTimes = () => {
@@ -70,6 +70,7 @@ class Booking extends React.Component {
   //     });
   // };
 
+  //***** This can be refactored to use luxon display of the day */
   display_day = (day) => {
     day = parseInt(day);
     switch (day) {
@@ -92,6 +93,7 @@ class Booking extends React.Component {
     }
   };
 
+  //***** This can be refactored to use luxon display */
   display_time = (msm) => {
     var tzmsm = this.shift_time(msm, true);
     let mins = ':' + (msm % 60);
@@ -105,6 +107,7 @@ class Booking extends React.Component {
     return time12 + mins + 'pm';
   };
 
+  //***** This can be refactored to use luxon display */
   shift_time = (msm, isEastern) => {
     var now = moment();
     now.tz(this.props.time_zone);
@@ -139,6 +142,8 @@ class Booking extends React.Component {
   //   });
   // };
 
+  //****** This should update a selected item in the store */
+  //****** We should update the fetchedTimes in the store and then provide them here as an option in the drop down */
   handleDropDownChange = (e) => {
     var newState = {};
     //newState["time"] = false; //FIXME make sure the time drop down is unselected so the user isn't confused.
@@ -154,6 +159,7 @@ class Booking extends React.Component {
     this.postRequest();
   };
 
+  //***** This action should be moved to the redux folder */
   postRequest = () => {
     alert(
       'Please wait while we submit your booking request, then refresh the page (this might take 10 or 20 seconds)'
@@ -390,7 +396,7 @@ const mapStateToProps = (state) => {
     libraries: state.booking.libraries, // async
     languages: state.booking.language, // async
     times: state.booking.times, // async
-    time_zone: state.booking.time_zone, 
+    time_zone: state.booking.time_zone,
     language: state.booking.language,
     weekday: state.booking.weekday,
     displayDay: state.booking.displayDay,
@@ -403,13 +409,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     handleMentorChange: () => dispatch(actionCreators.mentorChange()),
     handleCommitChange: () => dispatch(actionCreators.commitChange()),
     getBookingData: () => dispatch(actionCreators.getBookingData()),
     getTimes: () => dispatch(actionCreators.getTimes()),
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Booking);
