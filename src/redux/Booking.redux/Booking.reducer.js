@@ -3,9 +3,9 @@ import 'moment-timezone';
 import * as actionTypes from './Booking.action';
 
 const BookingInitialState = {
-    libraries: [], // async
-    languages: {}, // async
-    times: [], // async
+    libraries: [], 
+    languages: [], 
+    times: [], 
     time_zone: moment.tz.guess(), 
     language: 1,
     weekday: 0, 
@@ -36,15 +36,20 @@ export const booking = (state = BookingInitialState, action) => {
             ...state,
             isCommitted: !state.isCommitted
         }
-    case actionTypes.SET_LIBRARIES:
+    case actionTypes.DROPDOWN_CHANGE:
         return {
             ...state,
-            libraries: action.payload
+            [action.payload.name]: action.payload.value
         }
     case actionTypes.SET_LANGUAGES:
         return {
             ...state,
             languages: action.payload
+        }
+    case actionTypes.SET_LIBRARIES:
+        return {
+            ...state,
+            libraries: action.payload
         }
     case actionTypes.SET_TIMES:
         return {

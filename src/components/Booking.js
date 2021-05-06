@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+//luxon npm package: https://www.npmjs.com/package/luxon
 import moment from 'moment';
 import 'moment-timezone';
 
-//luxon npm package: https://www.npmjs.com/package/luxon
 import menteeComputer from '../images/vbb-mentee-computer.png';
 
 import * as actionCreators from '../redux/Booking.redux/Booking.action';
@@ -15,60 +15,18 @@ class Booking extends React.Component {
   componentDidMount() {
     this.props.getBookingData();
     this.props.getTimes();
-    // this.fetchBookingData();
-    // this.fetchTimes();
   }
 
-  // working on async actions
-  // fetchBookingData = () => {
-  // axios
-  //   .get('http://127.0.0.1:8000/api/library/')
-  //   .then((res) => {
-  //     this.setState({
-  //       libraries: res.data,
-  //     });
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
-  // axios
-  //   .get('http://127.0.0.1:8000/api/language/')
-  //   .then((res) => {
-  //     this.setState({
-  //       languages: res.data,
-  //     });
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
-  // this.fetchTimes();
-  // };
-
-  // fetchTimes = () => {
-  //   axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
-  //   axios.defaults.xsrfCookieName = 'csrftoken';
-  //   axios.defaults.headers = {
-  //     'Content-Type': 'application/json',
-  //     Authorization: `Token ${this.props.token}`,
-  //   };
-  //   axios
-  //     .get('http://127.0.0.1:8000/api/available/', {
-  //       params: {
-  //         library: this.props.library,
-  //         language: this.props.language,
-  //         min_msm: this.shift_time(parseInt(this.props.weekday), false),
-  //         max_msm: this.shift_time(parseInt(this.props.weekday), false) + 1440,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       this.setState({
-  //         times: res.data,
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.language !== prevProps.language ||
+  //     this.props.time_zone !== prevProps.time_zone ||
+  //     this.props.library !== prevProps.library ||
+  //     this.props.weekday !== prevProps.weekday ||
+  //     this.props.sameAppointment !== prevProps.sameAppointment
+  //     ) {
+  //     this.props.getTimes()
+  //   }
+  // }
 
   //***** This can be refactored to use luxon display of the day */
   display_day = (day) => {
@@ -144,15 +102,15 @@ class Booking extends React.Component {
 
   //****** This should update a selected item in the store */
   //****** We should update the fetchedTimes in the store and then provide them here as an option in the drop down */
-  handleDropDownChange = (e) => {
-    var newState = {};
-    //newState["time"] = false; //FIXME make sure the time drop down is unselected so the user isn't confused.
-    newState[e.target.name] = e.target.value;
-    console.log(newState);
-    this.setState(newState, () => {
-      this.fetchTimes();
-    });
-  };
+  // handleDropDownChange = (e) => {
+  //   var newState = {};
+  //   //newState["time"] = false; //FIXME make sure the time drop down is unselected so the user isn't confused.
+  //   newState[e.target.name] = e.target.value;
+  //   console.log(newState);
+  //   // this.setState(newState, () => {
+  //   //   this.fetchTimes();
+  //   // });
+  // };
 
   submitRequest = () => {
     this.props.handleCommitChange(); // modified
@@ -209,16 +167,14 @@ class Booking extends React.Component {
             <select
               name="language"
               id="language"
-              onChange={this.handleDropDownChange}
+              onChange={(e) =>
+                this.props.handleDropDownChange(e.target.name, e.target.value)
+              }
             >
               {this.props.languages &&
                 this.props.languages.length > 0 &&
-                this.props.languages.map((lang) => {
-                  return (
-                    <option key={lang.id} value={lang.id}>
-                      {lang.name}
-                    </option>
-                  );
+                this.props.languages.map((lang, index) => {
+                  return <option key={index}>{lang}</option>;
                 })}
             </select>
             <br />
@@ -227,7 +183,9 @@ class Booking extends React.Component {
             <select
               name="time_zone"
               id="time_zone"
-              onChange={this.handleDropDownChange}
+              onChange={(e) =>
+                this.props.handleDropDownChange(e.target.name, e.target.value)
+              }
               value={this.props.time_zone}
             >
               {moment.tz.names().map((tz) => {
@@ -258,18 +216,18 @@ class Booking extends React.Component {
                 <select
                   name="library"
                   id="library"
-                  onChange={this.handleDropDownChange}
+                  onChange={(e) =>
+                    this.props.handleDropDownChange(
+                      e.target.name,
+                      e.target.value
+                    )
+                  }
                   style={{ marginTop: '0px' }}
                 >
-                  <option value="0">Select from Available Libraries:</option>
                   {this.props.libraries &&
                     this.props.libraries.length > 0 &&
-                    this.props.libraries.map((lib) => {
-                      return (
-                        <option key={lib.id} value={lib.id}>
-                          {lib.name}
-                        </option>
-                      );
+                    this.props.libraries.map((lib, index) => {
+                      return <option key={index}>{lib}</option>;
                     })}
                 </select>
                 <br />
@@ -281,7 +239,9 @@ class Booking extends React.Component {
             <select
               name="weekday"
               id="weekday"
-              onChange={this.handleDropDownChange}
+              onChange={(e) =>
+                this.props.handleDropDownChange(e.target.name, e.target.value)
+              }
             >
               <option value={0}>Monday</option>
               <option value={1440}>Tuesday</option>
@@ -294,15 +254,22 @@ class Booking extends React.Component {
             <br />
             <br />
             <label htmlFor="time">Time of Day:&nbsp;</label>
-            <select name="time" id="time" onChange={this.handleDropDownChange}>
-              <option value={false}>Select from Avaliable Times:</option>
+            <select
+              name="time"
+              id="time"
+              onChange={(e) =>
+                this.props.handleDropDownChange(e.target.name, e.target.value)
+              }
+            >
+              {/* <option value={false}>Select from Avaliable Times:</option> */}
               {this.props.times &&
                 this.props.times.length > 0 &&
-                this.props.times.map((time) => {
+                this.props.times.map((time, index) => {
                   return (
-                    <option key={time.msm} value={time.msm}>
-                      {this.display_time(time.msm)}
-                    </option>
+                    // <option key={time.msm} value={time.msm}>
+                    //   {this.display_time(time.msm)}
+                    // </option>
+                    <option key={index}>{time}</option>
                   );
                 })}
             </select>
@@ -324,7 +291,12 @@ class Booking extends React.Component {
                 <select
                   name="sameAppointment"
                   id="sameAppointment"
-                  onChange={this.handleDropDownChange}
+                  onChange={(e) =>
+                    this.props.handleDropDownChange(
+                      e.target.name,
+                      e.target.value
+                    )
+                  }
                   value={this.props.sameAppointment}
                 >
                   <option value="no">No, or I am unsure</option>
@@ -342,7 +314,12 @@ class Booking extends React.Component {
                   id="commitment"
                   name="commitment"
                   checked={this.props.isCommitted}
-                  onChange={this.props.handleCommitChange} // modify
+                  onChange={(e) =>
+                    this.props.handleDropDownChange(
+                      e.target.name,
+                      e.target.value
+                    )
+                  }
                 />
                 <label htmlFor="commitment">
                   Please double check that the time you have selected (every{' '}
@@ -392,9 +369,10 @@ class Booking extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    booking_state: state.booking,
     token: state.authToken,
     libraries: state.booking.libraries, // async
-    languages: state.booking.language, // async
+    languages: state.booking.languages, // async
     times: state.booking.times, // async
     time_zone: state.booking.time_zone,
     language: state.booking.language,
@@ -413,6 +391,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleMentorChange: () => dispatch(actionCreators.mentorChange()),
     handleCommitChange: () => dispatch(actionCreators.commitChange()),
+    handleDropDownChange: (name, value) =>
+      dispatch(actionCreators.dropDownChange(name, value)),
     getBookingData: () => dispatch(actionCreators.getBookingData()),
     getTimes: () => dispatch(actionCreators.getTimes()),
   };
