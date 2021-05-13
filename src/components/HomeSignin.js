@@ -34,8 +34,6 @@ const HomeSignin = ({
   logInEmailPassword,
   processing,
 }) => {
-  // debugger;
-  console.log({ processing });
   return (
     <Row justify="center" align="middle">
       <Col
