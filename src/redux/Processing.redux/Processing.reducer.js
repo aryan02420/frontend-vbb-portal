@@ -1,7 +1,13 @@
-import { SET_PROCESSING_LOGIN } from './Processing.actions';
+import {
+  SET_PROCESSING_LOGIN,
+  SET_PROCESSING_NEWSLETTER_SIGNUP,
+  SET_PROCESSING_REGISTRATION,
+} from './Processing.actions';
 
 const processingInitialState = {
   login: false,
+  registration: false,
+  newsletterSignup: false,
 };
 
 /**
@@ -18,6 +24,10 @@ export const processing = (state = processingInitialState, action) => {
   switch (action.type) {
     case SET_PROCESSING_LOGIN:
       return { ...state, login: action.payload };
+    case SET_PROCESSING_REGISTRATION:
+      return { ...state, registration: action.payload };
+    case SET_PROCESSING_NEWSLETTER_SIGNUP:
+      return { ...state, newsletterSignup: action.payload };
     default:
       return state;
   }
