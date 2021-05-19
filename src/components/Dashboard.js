@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../redux/actions';
-import { Card, Col, Row, Button, Alert } from 'antd';
+import { Card, Col, Row, Button, Alert, Drawer, Layout } from 'antd';
 
 import articulate from '../images/articulate-icon.png';
 import meet from '../images/meet-icon.webp';
@@ -14,10 +14,16 @@ import khan from '../images/khan-icon.jpg';
 const Dashboard = ({ getSessionInfo, user }) => {
 
   const { Meta } = Card;
+  const { Content } = Layout;
 
-  const onClose = (e) => {
+  const onAlertClose = (e) => {
     console.log(e, 'Alert was closed.');
   };
+
+  // sidebar collapsed state
+  const [drawerVisible, setDrawerVisible] = useState(false);
+
+  const onDrawerClose = () => setDrawerVisible(prev => !prev);
 
   // useEffect (() => {
   //   if (user.externalId) {
@@ -51,7 +57,7 @@ const Dashboard = ({ getSessionInfo, user }) => {
               type="warning"
               closable
               showIcon
-              onClose={onClose}
+              onClose={onAlertClose}
             />
               <Button
                 style={{ margin: '1rem 1rem 1rem 0' }}
