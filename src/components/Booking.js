@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-//luxon npm package: https://www.npmjs.com/package/luxon
+
 import moment from 'moment';
 import 'moment-timezone';
 
@@ -11,26 +11,12 @@ import * as actionCreators from '../redux/Booking.redux/Booking.action';
 
 import { DateTime } from 'luxon';
 
-// import { mentorChange, commitChange } from '../redux/Booking.redux/Booking.action';
-
 class Booking extends React.Component {
   componentDidMount() {
     this.props.getBookingData();
     this.props.getTimes();
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.language !== prevProps.language ||
-  //     this.props.time_zone !== prevProps.time_zone ||
-  //     this.props.library !== prevProps.library ||
-  //     this.props.weekday !== prevProps.weekday ||
-  //     this.props.sameAppointment !== prevProps.sameAppointment
-  //     ) {
-  //     this.props.getTimes()
-  //   }
-  // }
-
-<<<<<<< HEAD
   display_day = (time) => {
     const weekday = DateTime.fromISO(time).weekdayLong
     return weekday
@@ -41,115 +27,6 @@ class Booking extends React.Component {
     return newTime.toString()
   }
 
-  // display_time = (day) => {
-  //   var tzmsm = this.shift_time(msm, true);
-  //   let mins = ':' + (msm % 60);
-  //   if (msm % 60 === 0) mins = '';
-  //   else if (msm % 60 < 10) mins = ':0' + (msm % 60);
-  //   var time24 = parseInt(tzmsm / 60) % 24;
-  //   var time12 = parseInt(tzmsm / 60) % 12;
-  //   if (time24 === 0) return '12' + mins + 'am';
-  //   if (time24 === 12) return '12' + mins + 'pm';
-  //   if (time24 === time12) return time12 + mins + 'am';
-  //   return time12 + mins + 'pm';
-  // };
-
-  // shift_time = (msm, isEastern) => {
-  //   var now = moment();
-  //   now.tz(this.props.time_zone);
-  //   var localOffset = now.utcOffset();
-  //   //eastern time zone is the server standard as of 8/1/2020
-  //   now.tz('US/Eastern');
-  //   var easternOffset = now.utcOffset();
-  //   var diffInMinutes = localOffset - easternOffset;
-  //   //isEastern designates whether the given msm is in Eastern or the local time_zone
-  //   if (isEastern) return (msm + diffInMinutes + 10080) % 10080;
-  //   return (msm - diffInMinutes + 10080) % 10080;
-  // };
-=======
-  //***** This can be refactored to use luxon display of the day */
-  display_day = (day) => {
-    day = parseInt(day);
-    switch (day) {
-      case 0:
-        return 'Monday';
-      case 1440:
-        return 'Tuesday';
-      case 2880:
-        return 'Wednesday';
-      case 4320:
-        return 'Thursday';
-      case 5760:
-        return 'Friday';
-      case 7200:
-        return 'Saturday';
-      case 8640:
-        return 'Sunday';
-      default:
-        return '--';
-    }
-  };
-
-  //***** This can be refactored to use luxon display */
-  display_time = (msm) => {
-    var tzmsm = this.shift_time(msm, true);
-    let mins = ':' + (msm % 60);
-    if (msm % 60 === 0) mins = '';
-    else if (msm % 60 < 10) mins = ':0' + (msm % 60);
-    var time24 = parseInt(tzmsm / 60) % 24;
-    var time12 = parseInt(tzmsm / 60) % 12;
-    if (time24 === 0) return '12' + mins + 'am';
-    if (time24 === 12) return '12' + mins + 'pm';
-    if (time24 === time12) return time12 + mins + 'am';
-    return time12 + mins + 'pm';
-  };
-
-  //***** This can be refactored to use luxon display */
-  shift_time = (msm, isEastern) => {
-    var now = moment();
-    now.tz(this.props.time_zone);
-    var localOffset = now.utcOffset();
-    //eastern time zone is the server standard as of 8/1/2020
-    now.tz('US/Eastern');
-    var easternOffset = now.utcOffset();
-    var diffInMinutes = localOffset - easternOffset;
-    //isEastern designates whether the given msm is in Eastern or the local time_zone
-    if (isEastern) return (msm + diffInMinutes + 10080) % 10080;
-    return (msm - diffInMinutes + 10080) % 10080;
-  };
->>>>>>> 59c4d743e943887cb9f0f7f4b8decdb1d9c1fc60
-
-  // handleMentorChange = () => { // modify
-  //   this.setState(
-  //     {
-  //       isReturning: !this.state.isReturning,  // modify
-  //     },
-  //     () => {
-  //       if (!this.state.isReturning) {
-  //         this.setState({  // modify
-  //           library: 0,
-  //         });
-  //       }
-  //     }
-  //   );
-  // };
-
-  // handleCommitChange = (e) => {
-  //   this.setState({
-  //     isCommitted: !this.state.isCommitted,  // modify
-  //   });
-  // };
-
-  //****** This should update a selected item in the store */
-  //****** We should update the fetchedTimes in the store and then provide them here as an option in the drop down */
-  // handleDropDownChange = (e) => {
-  //   var newState = {};
-  //   newState[e.target.name] = e.target.value;
-    
-  //   this.setState(newState, () => {
-  //     this.fetchTimes();
-  //   });
-  // };
 
   submitRequest = () => {
     this.props.handleCommitChange(); // modified
@@ -191,22 +68,11 @@ class Booking extends React.Component {
   };
 
   render() {
-    // const t = DateTime.now().toString()
-    // console.log(t)
-    // const newTime = DateTime.fromISO(t, { zone: "Asia/Chongqing" });
-    // console.log(newTime.toString())
-    // console.log(Object.keys(this.props.times))
 
     return (
       <div className="twocol-container">
         <div id="booking-box">
           <h1 id="booking-header">Book Your Weekly Mentoring Session Below!</h1>
-          
-          {/* <p>
-            Select a day and time that you have available each week.
-            <br />
-            We'll match you with a child who needs you as their mentor.
-          </p> */}
           <br />
           <div className="booking-fields">
             <label htmlFor="language">Mentoring Language:&nbsp;</label>
@@ -244,19 +110,9 @@ class Booking extends React.Component {
             </select>
             <br />
             <br />
-            {/* <br style={{ paddingBottom: "-10px" }} /> */}
-            {/* <input
-              type="checkbox"
-              id="mentor"
-              name="mentor"
-              onChange={this.handleMentorChange}
-            /> */}
-            {/* <label htmlFor="mentor">Are you a returning mentor?</label> */}
-            {/* <div id="ex-space" /> */}
             {this.props.isReturning && (
               <div>
                 <label htmlFor="library">
-                  {/* style={{ paddingLeft: "50px" }} */}
                   Your Library:&nbsp;
                 </label>
                 <select
@@ -303,32 +159,17 @@ class Booking extends React.Component {
             <select
               name="time"
               id="time"
-<<<<<<< HEAD
               onChange={(e) => this.props.handleDropDownChange(e.target.name, e.target.value)}>
               <option value={false}>Select from Avaliable Times:</option>
-=======
-              onChange={(e) =>
-                this.props.handleDropDownChange(e.target.name, e.target.value)
-              }
-            >
-              {/* <option value={false}>Select from Avaliable Times:</option> */}
->>>>>>> 59c4d743e943887cb9f0f7f4b8decdb1d9c1fc60
               {this.props.times &&
                 Object.keys(this.props.times).length > 0 &&
                 Object.keys(this.props.times).map((slot, index) => {
                   const start_time = this.convert_timezone(this.props.times[slot].start_time)
                   const end_time = this.convert_timezone(this.props.times[slot].end_time)
                   return (
-                    // <option key={time.msm} value={time.msm}>
-                    //   {this.display_time(time.msm)}
-                    // </option>
-<<<<<<< HEAD
                     <option value={start_time} key={index}>
                       {start_time} to {end_time}
                     </option>
-=======
-                    <option key={index}>{time}</option>
->>>>>>> 59c4d743e943887cb9f0f7f4b8decdb1d9c1fc60
                   );
                 })}
             </select>
@@ -391,16 +232,6 @@ class Booking extends React.Component {
               </div>
             )}
           </div>
-          {/* <p>
-            If no avaliable times work with your weekly schedule,
-            <br />
-            <a href="mailto:mentor@villagebookbuilders.org">
-              {" "}
-              Contact the mentor advisors {" "}
-            </a>
-            at mentor@villagebookbuilders.org. <br />
-            Please include potential times available in the email! 
-          </p> */}
           <br />
           <br />
           <a href="/" type="button" className="btn goback-btn">
