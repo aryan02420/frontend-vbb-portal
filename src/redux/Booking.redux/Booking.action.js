@@ -7,6 +7,7 @@ export const DROPDOWN_CHANGE = 'DROPDOWN_CHANGE';
 export const SET_LIBRARIES = 'SET_LIBRARIES';
 export const SET_LANGUAGES = 'SET_LANGUAGES';
 export const SET_TIMES = 'SET_TIMES';
+export const POST_REQUEST = 'POST_REQUEST';
 
 
 const fakeLanguageData = {
@@ -89,8 +90,6 @@ export const setTimeInBooking = (time) => {
  */
 
 export const getBookingData = () => async (dispatch, getState) => {
-  console.log(fakeLanguageData.data)
-  console.log(fakeLibraryData.data)
 
   const authToken = getState().authToken;
   try {
@@ -134,13 +133,17 @@ export const getTimes = (e) => async (dispatch, getState) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${authToken}`,
     };
+
+
+    //how to match weekday? create another field with numbers 1-7?  
+
+
     //   const getLibraryResponse = await axios.get(PYTHON_API + 'v1/library/', {
     //     headers,
     //   });
     // const getTimeResponse = await axios.get(
     //   'http://127.0.0.1:8000/api/library/'
-    // );
-    // // need a given API to designate the params
+    // ),
     // params: {
     //   library: this.props.library,
     //   language: this.props.language,
@@ -155,5 +158,35 @@ export const getTimes = (e) => async (dispatch, getState) => {
   } catch (err) {
     //manage what happens when things go wrong
     console.log('Error in fetchTimes', err);
+  }
+};
+
+/**
+ * Create post request to send data.
+ * @returns void or error
+ */
+ export const postRequest = (e) => async (dispatch, getState) => {
+  const authToken = getState().authToken;
+  try {
+    //get user from backend
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    };
+    // const getTimeResponse = await axios.post(
+    //   'http://127.0.0.1:8000/api/book/'
+    // ),
+    // params: {
+    //   library: this.props.library,
+    //   language: this.props.language,
+    //   msm: this.props.time,
+    // }
+    alert('success!')
+
+  } catch (err) {
+        alert(
+          "We're sorry! Something went wrong while booking your appointment. Please contact your mentor advisor to find out more."
+        );
+        console.log(err);
   }
 };

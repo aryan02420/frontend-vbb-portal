@@ -29,42 +29,8 @@ class Booking extends React.Component {
 
 
   submitRequest = () => {
-    this.props.handleCommitChange(); // modified
-    this.postRequest();
-  };
-
-  //***** This action should be moved to the redux folder */
-  postRequest = () => {
-    alert(
-      'Please wait while we submit your booking request, then refresh the page (this might take 10 or 20 seconds)'
-    );
-    axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
-    axios.defaults.xsrfCookieName = 'csrftoken';
-    axios.defaults.headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Token ${this.props.token}`,
-    };
-    axios
-      .post('http://127.0.0.1:8000/api/book/', null, {
-        params: {
-          library: this.props.library,
-          language: this.props.language,
-          msm: this.props.time,
-        },
-      })
-      .then((res) => {
-        console.log('Success: ', res.success);
-        alert('Success!');
-        this.props.history.push('/');
-        window.location.reload(false);
-      })
-      .catch((err) => {
-        alert(
-          "We're sorry! Something went wrong while booking your appointment. Please contact your mentor advisor to find out more."
-        );
-        console.log(err);
-      });
-    this.props.history.push('/');
+    this.props.handleCommitChange(); 
+    this.props.postRequest();
   };
 
   render() {
@@ -257,13 +223,14 @@ class Booking extends React.Component {
   }
 }
 
+// some variables are unnecessary, could be removed later.
 const mapStateToProps = (state) => {
   return {
     booking_state: state.booking,
     token: state.authToken,
-    libraries: state.booking.libraries, // async
-    languages: state.booking.languages, // async
-    times: state.booking.times, // async
+    libraries: state.booking.libraries, 
+    languages: state.booking.languages, 
+    times: state.booking.times, 
     time_zone: state.booking.time_zone,
     language: state.booking.language,
     weekday: state.booking.weekday,
@@ -281,10 +248,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleMentorChange: () => dispatch(actionCreators.mentorChange()),
     handleCommitChange: () => dispatch(actionCreators.commitChange()),
-    handleDropDownChange: (name, value) =>
-      dispatch(actionCreators.dropDownChange(name, value)),
+    handleDropDownChange: (name, value) => dispatch(actionCreators.dropDownChange(name, value)),
     getBookingData: () => dispatch(actionCreators.getBookingData()),
     getTimes: () => dispatch(actionCreators.getTimes()),
+    postRequest: () => dispatch(actionCreators.postRequest())
   };
 };
 
