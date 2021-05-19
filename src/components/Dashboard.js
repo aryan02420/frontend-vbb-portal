@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../redux/actions';
-import { Card, Col, Row, Button, Alert, Drawer, Layout } from 'antd';
+import { Card, Col, Row, Button, Alert, Layout } from 'antd';
 
 import articulate from '../images/articulate-icon.png';
 import meet from '../images/meet-icon.webp';
@@ -10,8 +10,6 @@ import village from '../images/village.png';
 import facebook from '../images/facebook-icon.png';
 import idroo from '../images/idroo-icon.png';
 import khan from '../images/khan-icon.jpg';
-import SidebarMenu from '../containers/SidebarMenu';
-import MentorHeader from '../containers/MentorHeader';
 
 const Dashboard = ({ getSessionInfo, user }) => {
 
@@ -21,11 +19,6 @@ const Dashboard = ({ getSessionInfo, user }) => {
   const onAlertClose = (e) => {
     console.log(e, 'Alert was closed.');
   };
-
-  // sidebar collapsed state
-  const [drawerVisible, setDrawerVisible] = useState(false);
-
-  const onDrawerClose = () => setDrawerVisible(prev => !prev);
 
   // useEffect (() => {
   //   if (user.externalId) {
@@ -37,19 +30,6 @@ const Dashboard = ({ getSessionInfo, user }) => {
 
   return (
     <div>
-      <Drawer
-        title="VBB Portal"
-        placement="left"
-        closable={true}
-        onClose={onDrawerClose}
-        visible={drawerVisible}
-        width={250}
-        bodyStyle={{ paddingRight: '0px', paddingLeft: '0px' }}
-      >
-        <SidebarMenu />
-      </Drawer>
-      <Layout>
-      <MentorHeader onDrawerClose={onDrawerClose} />
       <h1>
         Weekly Mentoring Session
       </h1>
@@ -232,7 +212,6 @@ const Dashboard = ({ getSessionInfo, user }) => {
               </Col>
           </Row>
         </div>
-        </Layout>
     </div>
   )
 }
