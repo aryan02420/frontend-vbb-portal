@@ -17,8 +17,24 @@ const fakeLibraryData = {
   data: ['fake library1', 'fake library2', 'fake library3', 'fake library4']
 }
 
+// ISO time format
 const fakeTimeData = {
-  data: ['fake time1', 'fake time2', 'fake time3', 'fake time4']
+    slot1: {
+      start_time: '2021-05-15T09:00:00.000-04:00',
+      end_time: '2021-05-15T10:00:23.000-04:00'
+    },
+    slot2: {
+      start_time: '2021-05-17T15:00:00.000-04:00',
+      end_time: '2021-05-17T16:00:00.000-04:00'
+    },
+    slot3: {
+      start_time: '2021-05-18T21:00:00.000-04:00',
+      end_time: '2021-05-18T22:00:00.000-04:00'
+    },
+    slot4: {
+      start_time: '2021-05-19T23:00:00.000-04:00',
+      end_time: '2021-05-19T24:00:00.000-04:00'
+    }
 }
 
 
@@ -41,7 +57,7 @@ export const dropDown_Change = (name, value) => {
   }
 }
 
-export const dropDownChange = (name, value) => async (dispatch, getState) => {
+export const dropDownChange = (name, value, dispatch) => async (dispatch, getState) => {
   dispatch(dropDown_Change(name, value))
   dispatch(getTimes())
 }
@@ -134,7 +150,7 @@ export const getTimes = (e) => async (dispatch, getState) => {
 
     const getTimeResponse = fakeTimeData
 
-    dispatch(setTimeInBooking(getTimeResponse.data));
+    dispatch(setTimeInBooking(getTimeResponse));
 
   } catch (err) {
     //manage what happens when things go wrong

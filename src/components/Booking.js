@@ -8,6 +8,8 @@ import menteeComputer from '../images/vbb-mentee-computer.png';
 
 import * as actionCreators from '../redux/Booking.redux/Booking.action';
 
+import { DateTime } from 'luxon';
+
 // import { mentorChange, commitChange } from '../redux/Booking.redux/Booking.action';
 
 class Booking extends React.Component {
@@ -28,53 +30,41 @@ class Booking extends React.Component {
   //   }
   // }
 
-  display_day = (day) => {
-    day = parseInt(day);
-    switch (day) {
-      case 0:
-        return 'Monday';
-      case 1440:
-        return 'Tuesday';
-      case 2880:
-        return 'Wednesday';
-      case 4320:
-        return 'Thursday';
-      case 5760:
-        return 'Friday';
-      case 7200:
-        return 'Saturday';
-      case 8640:
-        return 'Sunday';
-      default:
-        return '--';
-    }
+  display_day = (time) => {
+    const weekday = DateTime.fromISO(time).weekdayLong
+    return weekday
   };
 
-  display_time = (msm) => {
-    var tzmsm = this.shift_time(msm, true);
-    let mins = ':' + (msm % 60);
-    if (msm % 60 === 0) mins = '';
-    else if (msm % 60 < 10) mins = ':0' + (msm % 60);
-    var time24 = parseInt(tzmsm / 60) % 24;
-    var time12 = parseInt(tzmsm / 60) % 12;
-    if (time24 === 0) return '12' + mins + 'am';
-    if (time24 === 12) return '12' + mins + 'pm';
-    if (time24 === time12) return time12 + mins + 'am';
-    return time12 + mins + 'pm';
-  };
+  convert_timezone = (t) => {
+    const newTime = DateTime.fromISO(t, { zone: this.props.time_zone });
+    return newTime.toString()
+  }
 
-  shift_time = (msm, isEastern) => {
-    var now = moment();
-    now.tz(this.props.time_zone);
-    var localOffset = now.utcOffset();
-    //eastern time zone is the server standard as of 8/1/2020
-    now.tz('US/Eastern');
-    var easternOffset = now.utcOffset();
-    var diffInMinutes = localOffset - easternOffset;
-    //isEastern designates whether the given msm is in Eastern or the local time_zone
-    if (isEastern) return (msm + diffInMinutes + 10080) % 10080;
-    return (msm - diffInMinutes + 10080) % 10080;
-  };
+  // display_time = (day) => {
+  //   var tzmsm = this.shift_time(msm, true);
+  //   let mins = ':' + (msm % 60);
+  //   if (msm % 60 === 0) mins = '';
+  //   else if (msm % 60 < 10) mins = ':0' + (msm % 60);
+  //   var time24 = parseInt(tzmsm / 60) % 24;
+  //   var time12 = parseInt(tzmsm / 60) % 12;
+  //   if (time24 === 0) return '12' + mins + 'am';
+  //   if (time24 === 12) return '12' + mins + 'pm';
+  //   if (time24 === time12) return time12 + mins + 'am';
+  //   return time12 + mins + 'pm';
+  // };
+
+  // shift_time = (msm, isEastern) => {
+  //   var now = moment();
+  //   now.tz(this.props.time_zone);
+  //   var localOffset = now.utcOffset();
+  //   //eastern time zone is the server standard as of 8/1/2020
+  //   now.tz('US/Eastern');
+  //   var easternOffset = now.utcOffset();
+  //   var diffInMinutes = localOffset - easternOffset;
+  //   //isEastern designates whether the given msm is in Eastern or the local time_zone
+  //   if (isEastern) return (msm + diffInMinutes + 10080) % 10080;
+  //   return (msm - diffInMinutes + 10080) % 10080;
+  // };
 
   // handleMentorChange = () => { // modify
   //   this.setState(
@@ -99,12 +89,11 @@ class Booking extends React.Component {
 
   // handleDropDownChange = (e) => {
   //   var newState = {};
-  //   //newState["time"] = false; //FIXME make sure the time drop down is unselected so the user isn't confused.
   //   newState[e.target.name] = e.target.value;
-  //   console.log(newState);
-  //   // this.setState(newState, () => {
-  //   //   this.fetchTimes();
-  //   // });
+    
+  //   this.setState(newState, () => {
+  //     this.fetchTimes();
+  //   });
   // };
 
   submitRequest = () => {
@@ -146,10 +135,17 @@ class Booking extends React.Component {
   };
 
   render() {
+    // const t = DateTime.now().toString()
+    // console.log(t)
+    // const newTime = DateTime.fromISO(t, { zone: "Asia/Chongqing" });
+    // console.log(newTime.toString())
+    // console.log(Object.keys(this.props.times))
+
     return (
       <div className="twocol-container">
         <div id="booking-box">
           <h1 id="booking-header">Book Your Weekly Mentoring Session Below!</h1>
+          
           {/* <p>
             Select a day and time that you have available each week.
             <br />
@@ -234,13 +230,13 @@ class Booking extends React.Component {
               id="weekday"
               onChange={(e) => this.props.handleDropDownChange(e.target.name, e.target.value)}
             >
-              <option value={0}>Monday</option>
-              <option value={1440}>Tuesday</option>
-              <option value={2880}>Wednesday</option>
-              <option value={4320}>Thursday</option>
-              <option value={5760}>Friday</option>
-              <option value={7200}>Saturday</option>
-              <option value={8640}>Sunday</option>
+              <option value={1}>Monday</option>
+              <option value={2}>Tuesday</option>
+              <option value={3}>Wednesday</option>
+              <option value={4}>Thursday</option>
+              <option value={5}>Friday</option>
+              <option value={6}>Saturday</option>
+              <option value={7}>Sunday</option>
             </select>
             <br />
             <br />
@@ -249,16 +245,18 @@ class Booking extends React.Component {
               name="time"
               id="time"
               onChange={(e) => this.props.handleDropDownChange(e.target.name, e.target.value)}>
-              {/* <option value={false}>Select from Avaliable Times:</option> */}
+              <option value={false}>Select from Avaliable Times:</option>
               {this.props.times &&
-                this.props.times.length > 0 &&
-                this.props.times.map((time, index) => {
+                Object.keys(this.props.times).length > 0 &&
+                Object.keys(this.props.times).map((slot, index) => {
+                  const start_time = this.convert_timezone(this.props.times[slot].start_time)
+                  const end_time = this.convert_timezone(this.props.times[slot].end_time)
                   return (
                     // <option key={time.msm} value={time.msm}>
                     //   {this.display_time(time.msm)}
                     // </option>
-                    <option key={index}>
-                      {time}
+                    <option value={start_time} key={index}>
+                      {start_time} to {end_time}
                     </option>
                   );
                 })}
@@ -303,8 +301,8 @@ class Booking extends React.Component {
                 />
                 <label htmlFor="commitment">
                   Please double check that the time you have selected (every{' '}
-                  {this.display_day(this.props.weekday)} at{' '}
-                  {this.display_time(parseInt(this.props.time))}) is your
+                  {this.display_day(this.props.time)} at{' '}
+                  {this.props.time}) is your
                   current mentoring time
                 </label>
                 <br />
