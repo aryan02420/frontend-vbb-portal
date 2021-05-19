@@ -1,17 +1,17 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../redux/actions';
 import {
-    BookOutlined,
     CalendarOutlined,
     FormOutlined,
     HomeOutlined,
     LogoutOutlined,
-    UnorderedListOutlined,
     UserOutlined,
   } from '@ant-design/icons';
   import { Avatar, Menu } from 'antd';
-  import React from 'react';
   import { Link, NavLink } from 'react-router-dom';
 
-  function SidebarMenu({ user }) {
+  const SidebarMenu = ({ user }) => {
     return (
       <>
         <Menu mode="inline" defaultSelectedKeys={['1']}>
@@ -24,9 +24,10 @@ import {
           >
             <Avatar style={{ color: '#FF914D' }} icon={<UserOutlined />} />
             <div style={{ fontSize: '.75rem', padding: '1rem' }}>
-              { user.first_name, user.last_name || 'Mentor'}
+              { user.firstName, user.lastName || 'Mentor'}
             </div>
           </div>
+          {/* All links are currently pointing to home until we confirm menu items */}
           <Menu.Item key="1" icon={<HomeOutlined />}>
             <NavLink to="/">Home</NavLink>
           </Menu.Item>
@@ -55,4 +56,10 @@ import {
     );
   }
 
-  export default SidebarMenu;
+  const mapStateToProps = (state) => {
+    return {
+    user: state.user
+    };
+  };
+
+  export default connect(mapStateToProps, actions)(SidebarMenu);
