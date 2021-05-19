@@ -10,6 +10,8 @@ import village from '../images/village.png';
 import facebook from '../images/facebook-icon.png';
 import idroo from '../images/idroo-icon.png';
 import khan from '../images/khan-icon.jpg';
+import SidebarMenu from '../containers/SidebarMenu';
+import MentorHeader from '../containers/MentorHeader';
 
 const Dashboard = ({ getSessionInfo, user }) => {
 
@@ -35,6 +37,19 @@ const Dashboard = ({ getSessionInfo, user }) => {
 
   return (
     <div>
+      <Drawer
+        title="VBB Portal"
+        placement="left"
+        closable={true}
+        onClose={onDrawerClose}
+        visible={drawerVisible}
+        width={250}
+        bodyStyle={{ paddingRight: '0px', paddingLeft: '0px' }}
+      >
+        <SidebarMenu />
+      </Drawer>
+      <Layout>
+      <MentorHeader onDrawerClose={onDrawerClose} />
       <h1>
         Weekly Mentoring Session
       </h1>
@@ -217,6 +232,7 @@ const Dashboard = ({ getSessionInfo, user }) => {
               </Col>
           </Row>
         </div>
+        </Layout>
     </div>
   )
 }
