@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+//luxon npm package: https://www.npmjs.com/package/luxon
 import moment from 'moment';
 import 'moment-timezone';
 
@@ -13,7 +14,6 @@ import { DateTime } from 'luxon';
 // import { mentorChange, commitChange } from '../redux/Booking.redux/Booking.action';
 
 class Booking extends React.Component {
-
   componentDidMount() {
     this.props.getBookingData();
     this.props.getTimes();
@@ -30,6 +30,7 @@ class Booking extends React.Component {
   //   }
   // }
 
+<<<<<<< HEAD
   display_day = (time) => {
     const weekday = DateTime.fromISO(time).weekdayLong
     return weekday
@@ -65,6 +66,58 @@ class Booking extends React.Component {
   //   if (isEastern) return (msm + diffInMinutes + 10080) % 10080;
   //   return (msm - diffInMinutes + 10080) % 10080;
   // };
+=======
+  //***** This can be refactored to use luxon display of the day */
+  display_day = (day) => {
+    day = parseInt(day);
+    switch (day) {
+      case 0:
+        return 'Monday';
+      case 1440:
+        return 'Tuesday';
+      case 2880:
+        return 'Wednesday';
+      case 4320:
+        return 'Thursday';
+      case 5760:
+        return 'Friday';
+      case 7200:
+        return 'Saturday';
+      case 8640:
+        return 'Sunday';
+      default:
+        return '--';
+    }
+  };
+
+  //***** This can be refactored to use luxon display */
+  display_time = (msm) => {
+    var tzmsm = this.shift_time(msm, true);
+    let mins = ':' + (msm % 60);
+    if (msm % 60 === 0) mins = '';
+    else if (msm % 60 < 10) mins = ':0' + (msm % 60);
+    var time24 = parseInt(tzmsm / 60) % 24;
+    var time12 = parseInt(tzmsm / 60) % 12;
+    if (time24 === 0) return '12' + mins + 'am';
+    if (time24 === 12) return '12' + mins + 'pm';
+    if (time24 === time12) return time12 + mins + 'am';
+    return time12 + mins + 'pm';
+  };
+
+  //***** This can be refactored to use luxon display */
+  shift_time = (msm, isEastern) => {
+    var now = moment();
+    now.tz(this.props.time_zone);
+    var localOffset = now.utcOffset();
+    //eastern time zone is the server standard as of 8/1/2020
+    now.tz('US/Eastern');
+    var easternOffset = now.utcOffset();
+    var diffInMinutes = localOffset - easternOffset;
+    //isEastern designates whether the given msm is in Eastern or the local time_zone
+    if (isEastern) return (msm + diffInMinutes + 10080) % 10080;
+    return (msm - diffInMinutes + 10080) % 10080;
+  };
+>>>>>>> 59c4d743e943887cb9f0f7f4b8decdb1d9c1fc60
 
   // handleMentorChange = () => { // modify
   //   this.setState(
@@ -87,6 +140,8 @@ class Booking extends React.Component {
   //   });
   // };
 
+  //****** This should update a selected item in the store */
+  //****** We should update the fetchedTimes in the store and then provide them here as an option in the drop down */
   // handleDropDownChange = (e) => {
   //   var newState = {};
   //   newState[e.target.name] = e.target.value;
@@ -101,6 +156,7 @@ class Booking extends React.Component {
     this.postRequest();
   };
 
+  //***** This action should be moved to the redux folder */
   postRequest = () => {
     alert(
       'Please wait while we submit your booking request, then refresh the page (this might take 10 or 20 seconds)'
@@ -157,16 +213,14 @@ class Booking extends React.Component {
             <select
               name="language"
               id="language"
-              onChange={(e) => this.props.handleDropDownChange(e.target.name, e.target.value)}
+              onChange={(e) =>
+                this.props.handleDropDownChange(e.target.name, e.target.value)
+              }
             >
               {this.props.languages &&
                 this.props.languages.length > 0 &&
                 this.props.languages.map((lang, index) => {
-                  return (
-                    <option key={index}>
-                      {lang}
-                    </option>
-                  );
+                  return <option key={index}>{lang}</option>;
                 })}
             </select>
             <br />
@@ -175,7 +229,9 @@ class Booking extends React.Component {
             <select
               name="time_zone"
               id="time_zone"
-              onChange={(e) => this.props.handleDropDownChange(e.target.name, e.target.value)}
+              onChange={(e) =>
+                this.props.handleDropDownChange(e.target.name, e.target.value)
+              }
               value={this.props.time_zone}
             >
               {moment.tz.names().map((tz) => {
@@ -206,17 +262,18 @@ class Booking extends React.Component {
                 <select
                   name="library"
                   id="library"
-                  onChange={(e) => this.props.handleDropDownChange(e.target.name, e.target.value)}
+                  onChange={(e) =>
+                    this.props.handleDropDownChange(
+                      e.target.name,
+                      e.target.value
+                    )
+                  }
                   style={{ marginTop: '0px' }}
                 >
                   {this.props.libraries &&
                     this.props.libraries.length > 0 &&
                     this.props.libraries.map((lib, index) => {
-                      return (
-                        <option key={index}>
-                          {lib}
-                        </option>
-                      );
+                      return <option key={index}>{lib}</option>;
                     })}
                 </select>
                 <br />
@@ -228,7 +285,9 @@ class Booking extends React.Component {
             <select
               name="weekday"
               id="weekday"
-              onChange={(e) => this.props.handleDropDownChange(e.target.name, e.target.value)}
+              onChange={(e) =>
+                this.props.handleDropDownChange(e.target.name, e.target.value)
+              }
             >
               <option value={1}>Monday</option>
               <option value={2}>Tuesday</option>
@@ -244,8 +303,16 @@ class Booking extends React.Component {
             <select
               name="time"
               id="time"
+<<<<<<< HEAD
               onChange={(e) => this.props.handleDropDownChange(e.target.name, e.target.value)}>
               <option value={false}>Select from Avaliable Times:</option>
+=======
+              onChange={(e) =>
+                this.props.handleDropDownChange(e.target.name, e.target.value)
+              }
+            >
+              {/* <option value={false}>Select from Avaliable Times:</option> */}
+>>>>>>> 59c4d743e943887cb9f0f7f4b8decdb1d9c1fc60
               {this.props.times &&
                 Object.keys(this.props.times).length > 0 &&
                 Object.keys(this.props.times).map((slot, index) => {
@@ -255,9 +322,13 @@ class Booking extends React.Component {
                     // <option key={time.msm} value={time.msm}>
                     //   {this.display_time(time.msm)}
                     // </option>
+<<<<<<< HEAD
                     <option value={start_time} key={index}>
                       {start_time} to {end_time}
                     </option>
+=======
+                    <option key={index}>{time}</option>
+>>>>>>> 59c4d743e943887cb9f0f7f4b8decdb1d9c1fc60
                   );
                 })}
             </select>
@@ -279,7 +350,12 @@ class Booking extends React.Component {
                 <select
                   name="sameAppointment"
                   id="sameAppointment"
-                  onChange={(e) => this.props.handleDropDownChange(e.target.name, e.target.value)}
+                  onChange={(e) =>
+                    this.props.handleDropDownChange(
+                      e.target.name,
+                      e.target.value
+                    )
+                  }
                   value={this.props.sameAppointment}
                 >
                   <option value="no">No, or I am unsure</option>
@@ -297,7 +373,12 @@ class Booking extends React.Component {
                   id="commitment"
                   name="commitment"
                   checked={this.props.isCommitted}
-                  onChange={(e) => this.props.handleDropDownChange(e.target.name, e.target.value)}
+                  onChange={(e) =>
+                    this.props.handleDropDownChange(
+                      e.target.name,
+                      e.target.value
+                    )
+                  }
                 />
                 <label htmlFor="commitment">
                   Please double check that the time you have selected (every{' '}
@@ -365,14 +446,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     handleMentorChange: () => dispatch(actionCreators.mentorChange()),
     handleCommitChange: () => dispatch(actionCreators.commitChange()),
-    handleDropDownChange: (name, value) => dispatch(actionCreators.dropDownChange(name, value)),
+    handleDropDownChange: (name, value) =>
+      dispatch(actionCreators.dropDownChange(name, value)),
     getBookingData: () => dispatch(actionCreators.getBookingData()),
-    getTimes: () => dispatch(actionCreators.getTimes())
-  }
-}
+    getTimes: () => dispatch(actionCreators.getTimes()),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Booking);
