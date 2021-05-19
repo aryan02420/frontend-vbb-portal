@@ -14,6 +14,7 @@ import ProgressBar from './ProgressBar';
 const MasterForm = ({
   registerForNewsletter,
   subUserRegistration,
+  processing,
   history,
 }) => {
   let [currentStep, setCurrentStep] = useState(1);
@@ -48,6 +49,7 @@ const MasterForm = ({
           <Button
             style={{ marginRight: '10px' }}
             type="button"
+            disabled={processing.newsletterSignup}
             onClick={() => {
               //@todo: how do we handle previously submitted user?
               registerForNewsletter();
@@ -77,6 +79,7 @@ const MasterForm = ({
         <Button
           style={{ marginRight: '10px' }}
           type="button"
+          disabled={processing.registration}
           onClick={() => {
             subUserRegistration(history);
           }}
@@ -112,4 +115,10 @@ const MasterForm = ({
   );
 };
 
-export default withRouter(connect(null, actions)(MasterForm));
+const mapStateToProps = (state) => {
+  return {
+    processing: state.processing,
+  };
+};
+
+export default withRouter(connect(mapStateToProps, actions)(MasterForm));

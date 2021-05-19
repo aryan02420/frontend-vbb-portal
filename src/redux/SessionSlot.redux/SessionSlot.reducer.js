@@ -30,14 +30,3 @@ export const sessionSlot = (state = sessionSlotInitialState, action) => {
       return state;
   }
 };
-// likely initialState
-// state = {
-//   id: '',
-//   display: '',
-//   endDate: '',
-//   mentorNotes: '',
-//   unbookConfirmation: false,
-//   readyToApplyChanges: false,
-//   didCommunicate: '',
-//   proceedToUnbook: '',
-// };

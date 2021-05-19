@@ -32,6 +32,7 @@ const HomeSignin = ({
   registrationForm,
   setRegistrationForm,
   logInEmailPassword,
+  processing,
 }) => {
   return (
     <Row justify="center" align="middle">
@@ -96,6 +97,17 @@ const HomeSignin = ({
               }
             />
           </Form.Item>
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={(e) => {
+              e.preventDefault();
+              logInEmailPassword(history);
+            }}
+            disabled={processing.login}
+          >
+            Log In
+          </Button>
         </div>
         {/* <Form.Item>
           <Form.Item name="remember" valuePropName="checked" noStyle>
@@ -105,16 +117,6 @@ const HomeSignin = ({
             Forgot password
           </a>
         </Form.Item> */}
-          <Button
-            type="primary"
-            htmlType="button"
-            onClick={(e) => {
-              e.preventDefault();
-              logInEmailPassword(history);
-            }}
-          >
-            Log In
-          </Button>
         {/* GoogleLogin commented out for ease of local development until production ready */}
         {/* <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
@@ -133,7 +135,10 @@ const HomeSignin = ({
 };
 
 const mapStateToProps = (state) => {
-  return { registrationForm: state.registrationForm };
+  return {
+    registrationForm: state.registrationForm,
+    processing: state.processing,
+  };
 };
 
 export default withRouter(connect(mapStateToProps, actions)(HomeSignin));

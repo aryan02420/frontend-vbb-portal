@@ -2,13 +2,7 @@ import axios from 'axios';
 
 import { sleep } from '../../util/sleep';
 import { getDateStr } from '../../helpers';
-import {
-  PYTHON_API,
-  setLoading,
-  setLoadingFalse,
-  setIsError,
-  clearIsError,
-} from '../actions';
+import { PYTHON_API, setIsError, clearIsError } from '../actions';
 
 // const fakeSessionResponseData = {
 //   id: 'FakeId',
@@ -38,8 +32,10 @@ export const setSessionEndDate = (endDate) => {
  * endpoint: /session/:id
  * @param {string} sessionId
  */
-export const getSessionInfo = (userExternalId) => async (dispatch, getState) => {
-  dispatch(setLoading());
+export const getSessionInfo = (userExternalId) => async (
+  dispatch,
+  getState
+) => {
   try {
     const token = getState().authToken;
     const url = PYTHON_API + 'v1/session/' + userExternalId;
@@ -50,8 +46,6 @@ export const getSessionInfo = (userExternalId) => async (dispatch, getState) => 
     };
     const responseData = await axios.get({ url, headers }).data;
 
-    dispatch(setLoadingFalse());
-    debugger
     const newSession = {
       id: responseData.id,
       display: responseData.display,
@@ -66,7 +60,6 @@ export const getSessionInfo = (userExternalId) => async (dispatch, getState) => 
 
     dispatch(setSessionInfo(newSession));
   } catch (err) {
-    dispatch(setLoadingFalse());
     console.error('Error getting Session Info', err);
     dispatch(
       setIsError('There was an error in retrieving your mentoring sessions')
@@ -84,7 +77,6 @@ export const getSessionInfo = (userExternalId) => async (dispatch, getState) => 
  * @param {string} sessionId
  */
 export const updateSessionInfo = (sessionId) => async (dispatch, getState) => {
-  dispatch(setLoading());
   try {
     const sessionInfo = getState().sessionInfo;
     const { endDate, mentorNotes } = sessionInfo;
@@ -98,9 +90,7 @@ export const updateSessionInfo = (sessionId) => async (dispatch, getState) => {
       Authorization: `Bearer ${token}`,
     };
     await axios.patch({ url, body, headers }).data;
-    dispatch(setLoadingFalse());
   } catch (err) {
-    dispatch(setLoadingFalse());
     console.error('Error updating Session Info', err);
     dispatch(
       setIsError('There was an error in updating your mentoring sessions')
@@ -121,7 +111,6 @@ export const unbookSession = (sessionId, history) => async (
   dispatch,
   getState
 ) => {
-  dispatch(setLoading());
   try {
     const body = { end_date: getDateStr(0), mentor_notes: null };
 
@@ -133,10 +122,8 @@ export const unbookSession = (sessionId, history) => async (
       Authorization: `Bearer ${token}`,
     };
     await axios.patch({ url, body, headers }).data;
-    dispatch(setLoadingFalse());
     history.push('/');
   } catch (err) {
-    dispatch(setLoadingFalse());
     console.error('Error Cancelling Session Info', err);
     dispatch(
       setIsError('There was an error cancelling your mentoring session')

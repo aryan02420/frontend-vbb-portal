@@ -5,8 +5,7 @@ import {
   clearIsError,
   PYTHON_API,
   setIsError,
-  setLoading,
-  setLoadingFalse,
+  setProcessingRegistration,
   setUser,
 } from '../actions';
 import { USER_TYPES } from '../User.redux/User.types';
@@ -29,7 +28,7 @@ export const setRegistrationForm = (regForm) => {
  * @returns null
  */
 export const subUserRegistration = (history) => async (dispatch, getState) => {
-  dispatch(setLoading);
+  dispatch(setProcessingRegistration(true));
   const regForm = getState().registrationForm;
   const headers = {
     'Content-Type': 'application/json',
@@ -56,8 +55,9 @@ export const subUserRegistration = (history) => async (dispatch, getState) => {
       await sleep(2000);
       dispatch(clearIsError());
     }
-    dispatch(setLoadingFalse);
+    dispatch(setProcessingRegistration(false));
   } catch (err) {
+    dispatch(setProcessingRegistration(false));
     console.error('mentor registration error', err);
   }
 };

@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 import { formatPhoneNumber } from '../../util/formatPhoneNumber';
-import { PYTHON_API, setLoading, setLoadingFalse } from '../actions';
+import { PYTHON_API, setProcessingNewsletterSignup } from '../actions';
 import { NEWSLETTER_SUBSCRIBER_TYPES } from './Newsletter.types';
 
 export const registerForNewsletter = () => async (dispatch, getState) => {
-  dispatch(setLoading);
+  dispatch(setProcessingNewsletterSignup(true));
   const regForm = getState().registrationForm;
   const headers = {
     'Content-Type': 'application/json',
@@ -26,6 +26,5 @@ export const registerForNewsletter = () => async (dispatch, getState) => {
       console.error('Registering user for newsletter failed', err);
     }
   }
-
-  dispatch(setLoadingFalse);
+  dispatch(setProcessingNewsletterSignup(false));
 };
