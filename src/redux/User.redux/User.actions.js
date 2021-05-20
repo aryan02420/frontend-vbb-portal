@@ -2,8 +2,8 @@ import axios from 'axios';
 
 import {
   PYTHON_API,
-  setLoading,
-  setLoadingFalse,
+  // setLoading,
+  // setLoadingFalse,
   setIsError,
   clearIsError,
 } from '../actions';
@@ -26,7 +26,7 @@ export const setUser = (user) => {
  * @param {string} userExternalId
  */
 export const getUserInfo = (userExternalId) => async (dispatch, getState) => {
-  dispatch(setLoading());
+  // dispatch(setLoading());
   try {
     const token = getState().authToken;
     const url = PYTHON_API + 'v1/auth/getcurrentuser';
@@ -37,7 +37,7 @@ export const getUserInfo = (userExternalId) => async (dispatch, getState) => {
     };
     const responseData = await axios.get({ url, headers }).data;
 
-    dispatch(setLoadingFalse());
+    // dispatch(setLoadingFalse());
     debugger
 
     //TODO REMOVE logging once we're done with setup
@@ -46,7 +46,7 @@ export const getUserInfo = (userExternalId) => async (dispatch, getState) => {
 
     dispatch(responseData);
   } catch (err) {
-    dispatch(setLoadingFalse());
+    // dispatch(setLoadingFalse());
     console.error('Error getting user info', err);
     dispatch(
       setIsError('There was an error in retrieving the user')
