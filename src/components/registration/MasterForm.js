@@ -20,6 +20,9 @@ const MasterForm = ({
   let [currentStep, setCurrentStep] = useState(1);
 
   const next = () => {
+    if (currentStep === 1) {
+      registerForNewsletter();
+    }
     window.scrollTo(0, 0);
     currentStep = currentStep === 4 ? 4 : currentStep + 1;
     setCurrentStep(currentStep);
@@ -30,67 +33,67 @@ const MasterForm = ({
     setCurrentStep(currentStep);
   };
 
-  const backButton = () => {
-    if (currentStep === 2 || currentStep === 3) {
-      return (
-        <Button style={{ marginRight: '10px' }} type="button" onClick={back}>
-          <LeftOutlined />
-          Back
-        </Button>
-      );
-    }
-    return null;
-  };
+  // const backButton = () => {
+  //   if (currentStep === 2 || currentStep === 3) {
+  //     return (
+  //       <Button style={{ marginRight: '10px' }} type="button" onClick={back}>
+  //         <LeftOutlined />
+  //         Back
+  //       </Button>
+  //     );
+  //   }
+  //   return null;
+  // };
 
-  const nextButton = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <Button
-            style={{ marginRight: '10px' }}
-            type="button"
-            disabled={processing.newsletterSignup}
-            onClick={() => {
-              //@todo: how do we handle previously submitted user?
-              registerForNewsletter();
-              next();
-            }}
-          >
-            Next
-            <RightOutlined />
-          </Button>
-        );
+  // const nextButton = () => {
+  //   switch (currentStep) {
+  //     case 1:
+  //       return (
+  //         <Button
+  //           style={{ marginRight: '10px' }}
+  //           type="button"
+  //           disabled="true" //{processing.newsletterSignup}
+  //           onClick={() => {
+  //             //@todo: how do we handle previously submitted user?
+  //             registerForNewsletter();
+  //             next();
+  //           }}
+  //         >
+  //           Next
+  //           <RightOutlined />
+  //         </Button>
+  //       );
 
-      case 2:
-        return (
-          <Button style={{ marginRight: '10px' }} type="button" onClick={next}>
-            Next
-            <RightOutlined />
-          </Button>
-        );
-      default:
-        return null;
-    }
-  };
+  //     case 2:
+  //       return (
+  //         <Button style={{ marginRight: '10px' }} type="button" onClick={next}>
+  //           Next
+  //           <RightOutlined />
+  //         </Button>
+  //       );
+  //     default:
+  //       return null;
+  //   }
+  // };
 
-  const registerButton = () => {
-    if (currentStep === 3) {
-      return (
-        <Button
-          style={{ marginRight: '10px' }}
-          type="button"
-          disabled={processing.registration}
-          onClick={() => {
-            subUserRegistration(history);
-          }}
-        >
-          Register
-          <CheckOutlined />
-        </Button>
-      );
-    }
-    return null;
-  };
+  // const registerButton = () => {
+  //   if (currentStep === 3) {
+  //     return (
+  //       <Button
+  //         style={{ marginRight: '10px' }}
+  //         type="button"
+  //         disabled={processing.registration}
+  //         onClick={() => {
+  //           subUserRegistration(history);
+  //         }}
+  //       >
+  //         Register
+  //         <CheckOutlined />
+  //       </Button>
+  //     );
+  //   }
+  //   return null;
+  // };
 
   return (
     <div>
@@ -103,13 +106,17 @@ const MasterForm = ({
       )}
 
       <div>
-        <Step1 currentStep={currentStep} />
-        <Step2 currentStep={currentStep} />
+        <Step1 currentStep={currentStep} nextOnClick={next} />
+        <Step2
+          currentStep={currentStep}
+          backOnClick={back}
+          nextOnClick={next}
+        />
         <Step3 currentStep={currentStep} />
         <Step4 currentStep={currentStep} />
-        {backButton()}
+        {/* {backButton()}
         {nextButton()}
-        {registerButton()}
+        {registerButton()} */}
       </div>
     </div>
   );
