@@ -51,33 +51,62 @@ export const commitChange = () => {
   }
 }
 
-export const dropDown_Change = (name, value) => {
+/**
+ * Update Booking form, then fetch booking time slots if all options are selected.
+ */
+export const updatingBookingForm = (optionName, optionValue) => async (dispatch, getState) => {
+  dispatch(updateFormValues(optionName, optionValue));
+  const {language, library, time_zone, weekday} = getState().booking;
+  if ((language && library && time_zone && weekday) !=='' )  {
+    console.log('it works!!')
+    dispatch(getBookingTimes());
+  }
+}
+
+const updateFormValues = (name, value) => {
   return {
     type: DROPDOWN_CHANGE,
     payload: { name, value }
   }
 }
 
-export const dropDownChange = (name, value, dispatch) => async (dispatch, getState) => {
-  dispatch(dropDown_Change(name, value))
-  dispatch(getTimes())
-}
+/**
+ * Gets the Times from the API and adds it to the bookings store
+ * @returns void or error
+ */
+ export const getBookingTimes = () => async (dispatch, getState) => {
+  const authToken = getState().authToken;
+  try {
+    //get user from backend
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    };
 
-export const setLibraryInBooking = (library) => {
-  return {
-    type: SET_LIBRARIES,
-    payload: library
+    //   const getLibraryResponse = await axios.get(PYTHON_API + 'v1/library/', {
+    //     headers,
+    //   });
+    // const getTimeResponse = await axios.get(
+    //   'http://127.0.0.1:8000/api/library/'
+    // ),
+    // params: {
+    //   library: this.props.library,
+    //   language: this.props.language,
+    //   min_msm: this.shift_time(parseInt(this.props.weekday), false),
+    //   max_msm: this.shift_time(parseInt(this.props.weekday), false) + 1440,
+    // }
+
+    const getTimeResponse = fakeTimeData
+
+    dispatch(setTimeInBooking(getTimeResponse));
+
+  } catch (err) {
+    //manage what happens when things go wrong
+    console.log('Error in fetchTimes', err);
   }
-}
+};
 
-export const setLanguageInBooking = (language) => {
-  return {
-    type: SET_LANGUAGES,
-    payload: language
-  }
-}
-
-export const setTimeInBooking = (time) => {
+const setTimeInBooking = (time) => {
   return {
     type: SET_TIMES,
     payload: time
@@ -121,51 +150,25 @@ export const getBookingData = () => async (dispatch, getState) => {
 };
 
 
-/**
- * Gets the Times from the API and adds it to the bookings store
- * @returns void or error
- */
-export const getTimes = (e) => async (dispatch, getState) => {
-  const authToken = getState().authToken;
-  try {
-    //get user from backend
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
-    };
-
-
-    //how to match weekday? create another field with numbers 1-7?  
-
-
-    //   const getLibraryResponse = await axios.get(PYTHON_API + 'v1/library/', {
-    //     headers,
-    //   });
-    // const getTimeResponse = await axios.get(
-    //   'http://127.0.0.1:8000/api/library/'
-    // ),
-    // params: {
-    //   library: this.props.library,
-    //   language: this.props.language,
-    //   min_msm: this.shift_time(parseInt(this.props.weekday), false),
-    //   max_msm: this.shift_time(parseInt(this.props.weekday), false) + 1440,
-    // }
-
-    const getTimeResponse = fakeTimeData
-
-    dispatch(setTimeInBooking(getTimeResponse));
-
-  } catch (err) {
-    //manage what happens when things go wrong
-    console.log('Error in fetchTimes', err);
+const setLibraryInBooking = (library) => {
+  return {
+    type: SET_LIBRARIES,
+    payload: library
   }
-};
+}
+
+const setLanguageInBooking = (language) => {
+  return {
+    type: SET_LANGUAGES,
+    payload: language
+  }
+}
 
 /**
  * Create post request to send data.
  * @returns void or error
  */
- export const postRequest = (e) => async (dispatch, getState) => {
+ export const createBooking = () => async (dispatch, getState) => {
   const authToken = getState().authToken;
   try {
     //get user from backend

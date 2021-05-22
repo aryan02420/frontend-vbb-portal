@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import moment from 'moment';
 import 'moment-timezone';
+import { Form, Checkbox } from 'antd';
 
 import menteeComputer from '../images/vbb-mentee-computer.png';
 
@@ -14,7 +15,7 @@ import { DateTime } from 'luxon';
 class Booking extends React.Component {
   componentDidMount() {
     this.props.getBookingData();
-    this.props.getTimes();
+    this.props.getBookingTimes();
   }
 
   display_day = (time) => {
@@ -27,10 +28,9 @@ class Booking extends React.Component {
     return newTime.toString()
   }
 
-
   submitRequest = () => {
-    this.props.handleCommitChange(); 
-    this.props.postRequest();
+    this.props.handleCommitChange();
+    this.props.createBooking();
   };
 
   render() {
@@ -49,6 +49,7 @@ class Booking extends React.Component {
                 this.props.handleDropDownChange(e.target.name, e.target.value)
               }
             >
+              <option value=''>Select Your Languages:</option>
               {this.props.languages &&
                 this.props.languages.length > 0 &&
                 this.props.languages.map((lang, index) => {
@@ -92,6 +93,7 @@ class Booking extends React.Component {
                   }
                   style={{ marginTop: '0px' }}
                 >
+                  <option value=''>Select Your Library:</option>
                   {this.props.libraries &&
                     this.props.libraries.length > 0 &&
                     this.props.libraries.map((lib, index) => {
@@ -111,6 +113,7 @@ class Booking extends React.Component {
                 this.props.handleDropDownChange(e.target.name, e.target.value)
               }
             >
+              <option value=''>Select Avaliable Weekday:</option>
               <option value={1}>Monday</option>
               <option value={2}>Tuesday</option>
               <option value={3}>Wednesday</option>
@@ -228,9 +231,9 @@ const mapStateToProps = (state) => {
   return {
     booking_state: state.booking,
     token: state.authToken,
-    libraries: state.booking.libraries, 
-    languages: state.booking.languages, 
-    times: state.booking.times, 
+    libraries: state.booking.libraries,
+    languages: state.booking.languages,
+    times: state.booking.times,
     time_zone: state.booking.time_zone,
     language: state.booking.language,
     weekday: state.booking.weekday,
@@ -248,10 +251,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleMentorChange: () => dispatch(actionCreators.mentorChange()),
     handleCommitChange: () => dispatch(actionCreators.commitChange()),
-    handleDropDownChange: (name, value) => dispatch(actionCreators.dropDownChange(name, value)),
+    handleDropDownChange: (name, value) => dispatch(actionCreators.updatingBookingForm(name, value)),
     getBookingData: () => dispatch(actionCreators.getBookingData()),
-    getTimes: () => dispatch(actionCreators.getTimes()),
-    postRequest: () => dispatch(actionCreators.postRequest())
+    getBookingTimes: () => dispatch(actionCreators.getBookingTimes()),
+    createBooking: () => dispatch(actionCreators.createBooking())
   };
 };
 

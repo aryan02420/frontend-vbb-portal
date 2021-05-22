@@ -7,10 +7,10 @@ const BookingInitialState = {
     languages: [], 
     times: [], 
     time_zone: moment.tz.guess(), 
-    language: 1,
-    weekday: 0, 
+    language: '',
+    weekday: '', 
     displayDay: '',
-    library: false, // 0
+    library: '', 
     time: false,
     displayTime: '',
     isReturning: true, // 1
