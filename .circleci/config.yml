@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   Deploy:
     docker:
-      - image: circleci/python:3.8-node
+       - image: cimg/node:14.17.0
     steps:
       - checkout
       - restore_cache:
@@ -28,21 +28,3 @@ jobs:
           name: Run Tests
           command: |
             yarn test
-      - run:
-          command: |
-            pip install awscli
-      - run:
-          name: Remove Existing Build
-          command: aws s3 rm --recursive --endpoint=${DO_ENDPOINT} s3://${DO_SPACE}/${CIRCLE_BRANCH}/ 
-      - run:
-          name: Copy Static Files
-          command: aws s3 cp --recursive --endpoint=${DO_ENDPOINT} build/ s3://${DO_SPACE}/${CIRCLE_BRANCH}/ --acl public-read 
-
-workflows:
-  build-and-deploy-branch:
-    jobs:
-      - Deploy:
-          context: do-deployment
-          # filters:
-          #   branches:
-          #     only: master 
