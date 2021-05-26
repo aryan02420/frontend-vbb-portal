@@ -33,6 +33,10 @@ class Booking extends React.Component {
     this.props.createBooking();
   };
 
+  test = (e) => {
+    console.log(e)
+  }
+
   render() {
 
     return (
@@ -41,23 +45,17 @@ class Booking extends React.Component {
           <h1 id="booking-header">Book Your Weekly Mentoring Session Below!</h1>
           <br />
           <div className="booking-fields">
-            <label htmlFor="language">Mentoring Language:&nbsp;</label>
-            <select
-              name="language"
-              id="language"
-              onChange={(e) =>
-                this.props.handleDropDownChange(e.target.name, e.target.value)
-              }
-            >
-              <option value=''>Select Your Languages:</option>
-              {this.props.languages &&
-                this.props.languages.length > 0 &&
-                this.props.languages.map((lang, index) => {
-                  return <option key={index}>{lang}</option>;
-                })}
-            </select>
+
+            Mentoring Language:
+            <Checkbox.Group
+                style={{marginLeft: '5px'}}
+                options={this.props.languages}
+                onChange={(e) => this.props.handleCheckBox(e)}           
+              />
+       
             <br />
             <br />
+
             <label htmlFor="time_zone">Your Timezone:</label>&nbsp;
             <select
               name="time_zone"
@@ -75,8 +73,10 @@ class Booking extends React.Component {
                 );
               })}
             </select>
+
             <br />
             <br />
+            
             {this.props.isReturning && (
               <div>
                 <label htmlFor="library">
@@ -104,7 +104,7 @@ class Booking extends React.Component {
                 <br />
               </div>
             )}
-            {/* <br /> */}
+
             <label htmlFor="weekday">Day of the Week:&nbsp;</label>
             <select
               name="weekday"
@@ -122,8 +122,10 @@ class Booking extends React.Component {
               <option value={6}>Saturday</option>
               <option value={7}>Sunday</option>
             </select>
+
             <br />
             <br />
+
             <label htmlFor="time">Time of Day:&nbsp;</label>
             <select
               name="time"
@@ -142,8 +144,10 @@ class Booking extends React.Component {
                   );
                 })}
             </select>
+
             <br />
             <br />
+
             {this.props.time && (
               <div>
                 <label>
@@ -251,6 +255,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleMentorChange: () => dispatch(actionCreators.mentorChange()),
     handleCommitChange: () => dispatch(actionCreators.commitChange()),
+    handleCheckBox: (languages) => dispatch(actionCreators.updatingCheckBox(languages)),
     handleDropDownChange: (name, value) => dispatch(actionCreators.updatingBookingForm(name, value)),
     getBookingData: () => dispatch(actionCreators.getBookingData()),
     getBookingTimes: () => dispatch(actionCreators.getBookingTimes()),

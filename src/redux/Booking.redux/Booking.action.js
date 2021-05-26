@@ -3,6 +3,7 @@ import { PYTHON_API } from '../actions/index';
 
 export const MENTOR_CHANGE = 'MENTOR_CHANGE';
 export const COMMIT_CHANGE = 'COMMIT_CHANGE';
+export const UPDATING_CHECKBOX = 'UPDATING_CHECKBOX';
 export const DROPDOWN_CHANGE = 'DROPDOWN_CHANGE';
 export const SET_LIBRARIES = 'SET_LIBRARIES';
 export const SET_LANGUAGES = 'SET_LANGUAGES';
@@ -51,6 +52,14 @@ export const commitChange = () => {
   }
 }
 
+export const updatingCheckBox = (languages) => {
+  console.log(languages)
+  return {
+    type: UPDATING_CHECKBOX,
+    payload: { name: 'language', value: languages }
+  }
+}
+
 /**
  * Update Booking form, then fetch booking time slots if all options are selected.
  */
@@ -58,7 +67,7 @@ export const updatingBookingForm = (optionName, optionValue) => async (dispatch,
   dispatch(updateFormValues(optionName, optionValue));
   const {language, library, time_zone, weekday} = getState().booking;
   if ((language && library && time_zone && weekday) !=='' )  {
-    console.log('it works!!')
+    console.log('All OPTIONS SELECTED')
     dispatch(getBookingTimes());
   }
 }
