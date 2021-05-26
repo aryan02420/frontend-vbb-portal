@@ -86,10 +86,7 @@ class Booking extends React.Component {
                   name="library"
                   id="library"
                   onChange={(e) =>
-                    this.props.handleDropDownChange(
-                      e.target.name,
-                      e.target.value
-                    )
+                    this.props.handleDropDownChange(e.target.name,e.target.value)
                   }
                   style={{ marginTop: '0px' }}
                 >
@@ -165,10 +162,7 @@ class Booking extends React.Component {
                   name="sameAppointment"
                   id="sameAppointment"
                   onChange={(e) =>
-                    this.props.handleDropDownChange(
-                      e.target.name,
-                      e.target.value
-                    )
+                    this.props.handleDropDownChange(e.target.name,e.target.value)
                   }
                   value={this.props.sameAppointment}
                 >
@@ -230,21 +224,14 @@ class Booking extends React.Component {
   }
 }
 
-// some variables are unnecessary, could be removed later.
 const mapStateToProps = (state) => {
   return {
-    booking_state: state.booking,
-    token: state.authToken,
     libraries: state.booking.libraries,
     languages: state.booking.languages,
     times: state.booking.times,
     time_zone: state.booking.time_zone,
-    language: state.booking.language,
     weekday: state.booking.weekday,
-    displayDay: state.booking.displayDay,
-    library: state.booking.library,
     time: state.booking.time,
-    displayTime: state.booking.displayTime,
     isReturning: state.booking.isReturning,
     isCommitted: state.booking.isCommitted,
     sameAppointment: state.booking.sameAppointment,

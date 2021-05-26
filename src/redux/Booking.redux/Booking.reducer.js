@@ -37,10 +37,6 @@ export const booking = (state = BookingInitialState, action) => {
             isCommitted: !state.isCommitted
         }
     case actionTypes.UPDATING_CHECKBOX:
-        return {
-            ...state,
-            [action.payload.name]: action.payload.value
-        }
     case actionTypes.DROPDOWN_CHANGE:
         return {
             ...state,

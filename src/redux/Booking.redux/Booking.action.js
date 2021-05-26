@@ -53,7 +53,7 @@ export const commitChange = () => {
 }
 
 export const updatingCheckBox = (languages) => {
-  console.log(languages)
+  // console.log(languages)
   return {
     type: UPDATING_CHECKBOX,
     payload: { name: 'language', value: languages }
@@ -67,7 +67,7 @@ export const updatingBookingForm = (optionName, optionValue) => async (dispatch,
   dispatch(updateFormValues(optionName, optionValue));
   const {language, library, time_zone, weekday} = getState().booking;
   if ((language && library && time_zone && weekday) !=='' )  {
-    console.log('All OPTIONS SELECTED')
+    console.log('All OPTIONS SELECTED, GET TIMES')
     dispatch(getBookingTimes());
   }
 }
