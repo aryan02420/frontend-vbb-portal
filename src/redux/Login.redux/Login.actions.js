@@ -3,12 +3,11 @@ import { getUserFromAuthToken } from '../../util/getUserWithAuthToken';
 import { sleep } from '../../util/sleep';
 import {
   PYTHON_API,
-  setLoading,
-  setLoadingFalse,
   setIsError,
   clearIsError,
   setAuthToken,
   setUser,
+  setProcessingLogin,
 } from '../actions';
 
 /**
@@ -42,7 +41,7 @@ export const manageFailedGoogleLogin = (res) => async (dispatch) => {
  * @param {history function} history: function from react-router-dom
  */
 export const logIn = (googleToken, history) => async (dispatch) => {
-  dispatch(setLoading());
+  dispatch(setProcessingLogin(true));
   try {
     //send google token to the backend
     // previous endpoint   'http://127.0.0.1:8000/api/googlelogin/',
@@ -63,7 +62,7 @@ export const logIn = (googleToken, history) => async (dispatch) => {
 
     const statusCode = response.status;
 
-    dispatch(setLoadingFalse());
+    dispatch(setProcessingLogin(false));
 
     //call was successful
     if (statusCode === 200) {
@@ -86,7 +85,7 @@ export const logIn = (googleToken, history) => async (dispatch) => {
   } catch (err) {
     console.debug('Login Catch block failed login');
     console.debug('Backend Login Error: ', err);
-    dispatch(setLoadingFalse());
+    dispatch(setProcessingLogin(false));
     dispatch(setIsError(err.message ?? 'Connection to the API failed'));
     await sleep(2000);
     dispatch(clearIsError());
@@ -104,8 +103,11 @@ export const logInEmailPassword = (history) => async (dispatch, getState) => {
   const email = getState().registrationForm?.email;
   const password = getState().registrationForm?.password;
 
+  dispatch(setProcessingLogin(true));
+
   if (!email || !password) {
     console.debug('Can not log in user. Missing email or password');
+    dispatch(setProcessingLogin(false));
     //@todo: do we want to fail silently?
     return;
   }
@@ -121,8 +123,10 @@ export const logInEmailPassword = (history) => async (dispatch, getState) => {
     dispatch(setUser(transformUser(user)));
     dispatch(setAuthToken(accessToken));
     history.push('/');
+    dispatch(setProcessingLogin(false));
   } catch (err) {
     console.debug('Error logging in user');
+    dispatch(setProcessingLogin(false));
     setIsError('Error logging in User');
     await sleep(3000);
     clearIsError();

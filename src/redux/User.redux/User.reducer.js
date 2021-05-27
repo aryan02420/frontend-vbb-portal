@@ -1,4 +1,4 @@
-import { LOG_OUT, SET_USER } from '../actions';
+import { LOG_OUT, SET_USER, GET_USER_INFO } from '../actions';
 
 /**
  * User Types are:
@@ -16,6 +16,8 @@ const userInitialState = {
 export const user = (state = userInitialState, action) => {
   switch (action.type) {
     case SET_USER:
+      return action.payload;
+    case GET_USER_INFO:
       return action.payload;
     case LOG_OUT:
       return userInitialState;
