@@ -112,8 +112,12 @@ const MasterForm = ({
           backOnClick={back}
           nextOnClick={next}
         />
-        <Step3 currentStep={currentStep} />
-        <Step4 currentStep={currentStep} />
+        <Step3
+          currentStep={currentStep}
+          backOnClick={back}
+          nextOnClick={next}
+        />
+        <Step4 currentStep={currentStep} backOnClick={back} />
         {/* {backButton()}
         {nextButton()}
         {registerButton()} */}

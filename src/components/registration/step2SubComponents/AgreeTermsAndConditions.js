@@ -243,7 +243,6 @@ const AgreeTermsAndConditions = ({ registrationForm, setRegistrationForm }) => {
       <Form.Item
         name="terms-and-conditions"
         valuePropName="checked"
-        initialValue="false"
         rules={[
           {
             required: true,
@@ -254,6 +253,7 @@ const AgreeTermsAndConditions = ({ registrationForm, setRegistrationForm }) => {
         ]}
       >
         <Checkbox
+          initialValue="false"
           style={{ marginLeft: '25px' }}
           checked={
             registrationForm.additionalInformation.agreeTermsAndConditions
