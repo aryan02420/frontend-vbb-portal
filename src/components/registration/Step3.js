@@ -10,9 +10,14 @@ import {
   BookOutlined,
 } from '@ant-design/icons';
 import ActionPicture from '../../images/vbb-in-action.png';
-import { RightOutlined, LeftOutlined } from '@ant-design/icons';
+import { RightOutlined, LeftOutlined, CheckOutlined } from '@ant-design/icons';
 
-export const Step3 = ({ currentStep, backOnClick, nextOnClick }) => {
+export const Step3 = ({
+  currentStep,
+  backOnClick,
+  registerOnClick,
+  processing,
+}) => {
   if (currentStep !== 3) {
     return null;
   }
@@ -30,15 +35,26 @@ export const Step3 = ({ currentStep, backOnClick, nextOnClick }) => {
     );
   };
 
-  const nextButton = () => {
+  const registerButton = () => {
+    // return (
+    //   <Button
+    //     style={{ marginRight: '10px' }}
+    //     type="button"
+    //     onClick={nextOnClick}
+    //   >
+    //     Next
+    //     <RightOutlined />
+    //   </Button>
+    // );
     return (
       <Button
         style={{ marginRight: '10px' }}
         type="button"
-        onClick={nextOnClick}
+        disabled={processing.registration}
+        onClick={registerOnClick}
       >
-        Next
-        <RightOutlined />
+        Register
+        <CheckOutlined />
       </Button>
     );
   };
@@ -112,7 +128,7 @@ export const Step3 = ({ currentStep, backOnClick, nextOnClick }) => {
               Donate
             </Button>
             {backButton()}
-            {nextButton()}
+            {registerButton()}
           </Row>
         </Col>
         <Col xs={0} sm={0} md={0} lg={8} xl={12}>

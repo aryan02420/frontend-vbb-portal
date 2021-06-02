@@ -16,6 +16,7 @@ export const Step1 = ({
   registrationForm,
   setRegistrationForm,
   nextOnClick,
+  processing,
 }) => {
   const onFinish = () => {
     nextOnClick();
@@ -24,7 +25,12 @@ export const Step1 = ({
   const nextButton = () => {
     return (
       <Form.Item name="step1-next" className="submit">
-        <Button style={{ marginRight: '10px' }} type="button" htmlType="submit">
+        <Button
+          style={{ marginRight: '10px' }}
+          type="button"
+          htmlType="submit"
+          disabled={processing.newsletterSignup}
+        >
           Next
           <RightOutlined />
         </Button>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../redux/actions';
 import { withRouter } from 'react-router';
 import { Button } from 'antd';
 import { RightOutlined, LeftOutlined, CheckOutlined } from '@ant-design/icons';
+
+import * as actions from '../../redux/actions';
 
 import Step1 from './Step1';
 import Step2 from './Step2';
@@ -31,6 +32,10 @@ const MasterForm = ({
   const back = () => {
     currentStep = currentStep <= 1 ? 1 : currentStep - 1;
     setCurrentStep(currentStep);
+  };
+
+  const register = () => {
+    subUserRegistration(history);
   };
 
   // const backButton = () => {
@@ -77,21 +82,7 @@ const MasterForm = ({
   // };
 
   // const registerButton = () => {
-  //   if (currentStep === 3) {
-  //     return (
-  //       <Button
-  //         style={{ marginRight: '10px' }}
-  //         type="button"
-  //         disabled={processing.registration}
-  //         onClick={() => {
-  //           subUserRegistration(history);
-  //         }}
-  //       >
-  //         Register
-  //         <CheckOutlined />
-  //       </Button>
-  //     );
-  //   }
+  //
   //   return null;
   // };
 
@@ -106,7 +97,11 @@ const MasterForm = ({
       )}
 
       <div>
-        <Step1 currentStep={currentStep} nextOnClick={next} />
+        <Step1
+          currentStep={currentStep}
+          nextOnClick={next}
+          processing={processing}
+        />
         <Step2
           currentStep={currentStep}
           backOnClick={back}
@@ -115,7 +110,8 @@ const MasterForm = ({
         <Step3
           currentStep={currentStep}
           backOnClick={back}
-          nextOnClick={next}
+          registerOnClick={register}
+          processing={processing}
         />
         <Step4 currentStep={currentStep} backOnClick={back} />
         {/* {backButton()}
