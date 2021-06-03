@@ -1,7 +1,7 @@
 export const getMentorsResponse = {
-  count: 0,
-  next: 'string',
-  previous: 'string',
+  count: 3,
+  next: 'none',
+  previous: 'none',
   results: [algerianMentor, kenyanMentor, westCoastMentor],
 };
 

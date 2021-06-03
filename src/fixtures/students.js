@@ -1,8 +1,8 @@
 export const getStudentsResponse = {
-  count: 0,
-  next: 'string',
-  previous: 'string',
-  results: [coteDIvoireStudent, newYorkStudent],
+  count: 3,
+  next: 'none',
+  previous: 'none',
+  results: [coteDIvoireStudent, newYorkStudent, turkishStudent],
 };
 
 export const coteDIvoireStudent = {
