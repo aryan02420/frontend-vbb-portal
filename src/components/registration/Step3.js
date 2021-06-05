@@ -36,16 +36,6 @@ export const Step3 = ({
   };
 
   const registerButton = () => {
-    // return (
-    //   <Button
-    //     style={{ marginRight: '10px' }}
-    //     type="button"
-    //     onClick={nextOnClick}
-    //   >
-    //     Next
-    //     <RightOutlined />
-    //   </Button>
-    // );
     return (
       <Button
         style={{ marginRight: '10px' }}
@@ -146,4 +136,5 @@ export const Step3 = ({
 // })
 
 // export default connect(mapStateToProps)(Step4)
+
 export default Step3;

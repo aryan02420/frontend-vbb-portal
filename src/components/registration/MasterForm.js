@@ -38,54 +38,6 @@ const MasterForm = ({
     subUserRegistration(history);
   };
 
-  // const backButton = () => {
-  //   if (currentStep === 2 || currentStep === 3) {
-  //     return (
-  //       <Button style={{ marginRight: '10px' }} type="button" onClick={back}>
-  //         <LeftOutlined />
-  //         Back
-  //       </Button>
-  //     );
-  //   }
-  //   return null;
-  // };
-
-  // const nextButton = () => {
-  //   switch (currentStep) {
-  //     case 1:
-  //       return (
-  //         <Button
-  //           style={{ marginRight: '10px' }}
-  //           type="button"
-  //           disabled="true" //{processing.newsletterSignup}
-  //           onClick={() => {
-  //             //@todo: how do we handle previously submitted user?
-  //             registerForNewsletter();
-  //             next();
-  //           }}
-  //         >
-  //           Next
-  //           <RightOutlined />
-  //         </Button>
-  //       );
-
-  //     case 2:
-  //       return (
-  //         <Button style={{ marginRight: '10px' }} type="button" onClick={next}>
-  //           Next
-  //           <RightOutlined />
-  //         </Button>
-  //       );
-  //     default:
-  //       return null;
-  //   }
-  // };
-
-  // const registerButton = () => {
-  //
-  //   return null;
-  // };
-
   return (
     <div>
       {currentStep < 4 ? (
@@ -114,9 +66,6 @@ const MasterForm = ({
           processing={processing}
         />
         <Step4 currentStep={currentStep} backOnClick={back} />
-        {/* {backButton()}
-        {nextButton()}
-        {registerButton()} */}
       </div>
     </div>
   );

@@ -246,8 +246,8 @@ const AgreeTermsAndConditions = ({ registrationForm, setRegistrationForm }) => {
         rules={[
           {
             required: true,
-            transform: (value) => value || undefined, // Those two lines
-            type: 'boolean', // Do the magic
+            transform: (value) => value || undefined,
+            type: 'boolean',
             message: 'Please agree the terms and conditions.',
           },
         ]}
