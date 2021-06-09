@@ -1,6 +1,14 @@
 import moment from 'moment';
 import 'moment-timezone';
-import * as actionTypes from './Booking.action';
+
+import {
+    MENTOR_CHANGE,
+    COMMIT_CHANGE,
+    UPDATING_CHECKBOX,
+    DROPDOWN_CHANGE,
+    SET_LIBRARIES_AND_LANGUAGES,
+    SET_TIMES
+} from './Booking.action'
 
 const BookingInitialState = {
     libraries: [], 
@@ -21,7 +29,7 @@ const BookingInitialState = {
 export const booking = (state = BookingInitialState, action) => {
   //this needs to use the payload in someway
   switch (action.type) {
-    case actionTypes.MENTOR_CHANGE:
+    case MENTOR_CHANGE:
         let newLibrary = state.library
         if ( !state.isReturning ) {
             newLibrary = false
@@ -31,28 +39,24 @@ export const booking = (state = BookingInitialState, action) => {
             isReturning: !state.isReturning,
             library: newLibrary
         }
-    case actionTypes.COMMIT_CHANGE:
+    case COMMIT_CHANGE:
         return {
             ...state,
             isCommitted: !state.isCommitted
         }
-    case actionTypes.UPDATING_CHECKBOX:
-    case actionTypes.DROPDOWN_CHANGE:
+    case UPDATING_CHECKBOX:
+    case DROPDOWN_CHANGE:
         return {
             ...state,
             [action.payload.name]: action.payload.value
         }
-    case actionTypes.SET_LANGUAGES:
+    case SET_LIBRARIES_AND_LANGUAGES:
         return {
             ...state,
-            languages: action.payload
+            libraries: action.payload.library,
+            languages: action.payload.language
         }
-    case actionTypes.SET_LIBRARIES:
-        return {
-            ...state,
-            libraries: action.payload
-        }
-    case actionTypes.SET_TIMES:
+    case SET_TIMES:
         return {
             ...state,
             times: action.payload

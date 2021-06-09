@@ -5,11 +5,8 @@ export const MENTOR_CHANGE = 'MENTOR_CHANGE';
 export const COMMIT_CHANGE = 'COMMIT_CHANGE';
 export const UPDATING_CHECKBOX = 'UPDATING_CHECKBOX';
 export const DROPDOWN_CHANGE = 'DROPDOWN_CHANGE';
-export const SET_LIBRARIES = 'SET_LIBRARIES';
-export const SET_LANGUAGES = 'SET_LANGUAGES';
+export const SET_LIBRARIES_AND_LANGUAGES = 'SET_LIBRARIES_AND_LANGUAGES';
 export const SET_TIMES = 'SET_TIMES';
-export const POST_REQUEST = 'POST_REQUEST';
-
 
 const fakeLanguageData = {
   data: ['English', 'Spanish', 'French', 'German']
@@ -52,11 +49,11 @@ export const commitChange = () => {
   }
 }
 
-export const updatingCheckBox = (languages) => {
+export const updatingCheckBox = (language) => {
   // console.log(languages)
   return {
     type: UPDATING_CHECKBOX,
-    payload: { name: 'language', value: languages }
+    payload: { name: 'language', value: language }
   }
 }
 
@@ -67,7 +64,6 @@ export const updatingBookingForm = (optionName, optionValue) => async (dispatch,
   dispatch(updateFormValues(optionName, optionValue));
   const {language, library, time_zone, weekday} = getState().booking;
   if ((language && library && time_zone && weekday) !=='' )  {
-    console.log('All OPTIONS SELECTED, GET TIMES')
     dispatch(getBookingTimes());
   }
 }
@@ -92,26 +88,14 @@ const updateFormValues = (name, value) => {
       Authorization: `Bearer ${authToken}`,
     };
 
-    //   const getLibraryResponse = await axios.get(PYTHON_API + 'v1/library/', {
-    //     headers,
-    //   });
-    // const getTimeResponse = await axios.get(
-    //   'http://127.0.0.1:8000/api/library/'
-    // ),
-    // params: {
-    //   library: this.props.library,
-    //   language: this.props.language,
-    //   min_msm: this.shift_time(parseInt(this.props.weekday), false),
-    //   max_msm: this.shift_time(parseInt(this.props.weekday), false) + 1440,
-    // }
-
+    // fetch fake data
     const getTimeResponse = fakeTimeData
 
     dispatch(setTimeInBooking(getTimeResponse));
 
   } catch (err) {
     //manage what happens when things go wrong
-    console.log('Error in fetchTimes', err);
+    console.log('Error in getBookingTimes', err);
   }
 };
 
@@ -136,40 +120,25 @@ export const getBookingData = () => async (dispatch, getState) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${authToken}`,
     };
-    //   const getLibraryResponse = await axios.get(PYTHON_API + 'v1/library/', {
-    //     headers,
-    //   });
-    // const getLibraryResponse = await axios.get(
-    //   'http://127.0.0.1:8000/api/library/'
-    // );
-    // const getLanguageResponse = await axios.get(
-    //   'http://127.0.0.1:8000/api/language/'
-    // );
 
-    const getLanguageResponse = fakeLanguageData
+    // fetch fake data
     const getLibraryResponse = fakeLibraryData
+    const getLanguageResponse = fakeLanguageData
+    
 
-    dispatch(setLanguageInBooking(getLanguageResponse.data));
-    dispatch(setLibraryInBooking(getLibraryResponse.data));
+    dispatch(setLibraryAndLanguageInBooking(getLibraryResponse.data, getLanguageResponse.data));
 
   } catch (err) {
     //manage what happens when things go wrong
-    console.log('Error in fetchBookingData', err);
+    console.log('Error in getBookingData', err);
   }
 };
 
 
-const setLibraryInBooking = (library) => {
+const setLibraryAndLanguageInBooking = (library, language) => {
   return {
-    type: SET_LIBRARIES,
-    payload: library
-  }
-}
-
-const setLanguageInBooking = (language) => {
-  return {
-    type: SET_LANGUAGES,
-    payload: language
+    type: SET_LIBRARIES_AND_LANGUAGES,
+    payload: {library, language}
   }
 }
 
@@ -185,14 +154,9 @@ const setLanguageInBooking = (language) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${authToken}`,
     };
-    // const getTimeResponse = await axios.post(
-    //   'http://127.0.0.1:8000/api/book/'
-    // ),
-    // params: {
-    //   library: this.props.library,
-    //   language: this.props.language,
-    //   msm: this.props.time,
-    // }
+
+    // upload data to server-side
+
     alert('success!')
 
   } catch (err) {
