@@ -13,3 +13,4 @@ export * from '../User.redux/User.actions';
 export * from '../Registration.redux/Registration.actions';
 export * from '../Newsletter.redux/Newsletter.actions';
 export * from '../Processing.redux/Processing.actions';
+export * from '../Mentor.redux/Mentor.actions';
