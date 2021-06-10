@@ -3,6 +3,7 @@ import React from 'react';
 function MentorProfile() {
   return (
     <div>
+      <h1>Mentor Profile</h1>
       {false && ( //FIXME: get mentor profile information to display here
         <div>
           <br />
