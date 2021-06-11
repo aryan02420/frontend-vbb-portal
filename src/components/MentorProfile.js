@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../redux/actions';
-import { Button, Divider, Row, Col } from 'antd';
+import { Divider, Row, Col, Input, Button } from 'antd';
 
-const MentorProfile = ({ mentor }) => {
+const MentorProfile = ({ mentor, setMentor }) => {
+  const [edit, setEdit] = useState(false);
+
+  function handleOnClick(e) {
+    e.preventDefault();
+    setEdit(true);
+  }
+
   return (
     <div>
       <h1>Personal info</h1>
@@ -28,8 +35,22 @@ const MentorProfile = ({ mentor }) => {
       <Divider />
       <Row style={{ fontWeight: 'bold' }}>Email</Row>
       <Row>
-        <Col span={12}>{mentor.email} email@email.com</Col>
-        <Col span={12}>Edit</Col>
+        <Col span={12}>
+        {edit ?
+        <Input
+          name="email"
+          value={mentor.email}
+          onChange={(e) => {
+            const updatedMentor = {
+              ...mentor,
+              email: e.target.value,
+            };
+            setMentor(updatedMentor);
+          }}
+        />
+        : mentor.email, 'email@email.com'}
+        </Col>
+        <Col span={12}><Button type='link' onClick={ handleOnClick }>Edit</Button></Col>
       </Row>
       <Divider />
       <Row style={{ fontWeight: 'bold' }}>Phone</Row>
