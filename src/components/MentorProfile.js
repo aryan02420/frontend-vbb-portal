@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../redux/actions';
 import { Divider, Row, Col, Input, Button } from 'antd';
 
-const MentorProfile = ({ user, updateUser }) => {
+const MentorProfile = ({ user, updateUserInfo }) => {
   const [nameEdit, setNameEdit] = useState(false);
   const [dobEdit, setDobEdit] = useState(false);
   const [timezoneEdit, setTimezoneEdit] = useState(false);
@@ -13,7 +13,7 @@ const MentorProfile = ({ user, updateUser }) => {
   const [languagesEdit, setLanguagesEdit] = useState(false);
   const [passwordEdit, setPasswordEdit] = useState(false);
 
-  //TODO: Delete the below useState hook once the /mentor endpoint is up and running
+  //TODO: Delete the below useState hook once the /user endpoint is up and running
   const [value, setValue] = useState('');
 
   function handleNameClick(e) {
@@ -108,7 +108,7 @@ const MentorProfile = ({ user, updateUser }) => {
               value={ value }
               onChange={ handleChange }
             />
-            : mentor.firstName && mentor.lastName || 'Jane Doe'
+            : user.firstName && user.lastName || 'Jane Doe'
             }
             </Col>
             {nameEdit ?
@@ -127,7 +127,7 @@ const MentorProfile = ({ user, updateUser }) => {
               value={ value }
               onChange={ handleChange }
             />
-            : mentor.dateOfBirth || '01/01/2021'
+            : user.dateOfBirth || '01/01/2021'
             }
             </Col>
             {dobEdit ?
@@ -146,7 +146,7 @@ const MentorProfile = ({ user, updateUser }) => {
             value={ value }
             onChange={ handleChange }
           />
-          : mentor.timezone || 'Eastern Standard Time'
+          : user.timezone || 'Eastern Standard Time'
           }
           </Col>
           {timezoneEdit ?
@@ -165,7 +165,7 @@ const MentorProfile = ({ user, updateUser }) => {
           value={ value }
           onChange={ handleChange }
         />
-        : mentor.email || 'email@email.com'
+        : user.email || 'email@email.com'
         }
         </Col>
         {emailEdit ?
@@ -184,7 +184,7 @@ const MentorProfile = ({ user, updateUser }) => {
           value={ value }
           onChange={ handleChange }
         />
-        : mentor.phone || '+1 000-111-2222'
+        : user.phone || '+1 000-111-2222'
         }
         </Col>
         {phoneEdit ?
@@ -203,7 +203,7 @@ const MentorProfile = ({ user, updateUser }) => {
             value={ value }
             onChange={ handleChange }
           />
-          : mentor.city || 'New York'
+          : user.city || 'New York'
           }
           </Col>
           {cityEdit ?
@@ -222,7 +222,7 @@ const MentorProfile = ({ user, updateUser }) => {
               value={ value }
               onChange={ handleChange }
             />
-            : mentor.languages || 'Spanish, English'
+            : user.languages || 'Spanish, English'
             }
             </Col>
             {languagesEdit ?
@@ -257,7 +257,7 @@ const MentorProfile = ({ user, updateUser }) => {
 
 const mapStateToProps = (state) => {
   return {
-    mentor: state.mentor
+    user: state.user
   };
 };
 
