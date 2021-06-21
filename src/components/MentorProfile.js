@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../redux/actions';
 import { Divider, Row, Col, Input, Button } from 'antd';
 
-const MentorProfile = ({ mentor, updateMentor }) => {
+const MentorProfile = ({ user, updateUser }) => {
   const [nameEdit, setNameEdit] = useState(false);
   const [dobEdit, setDobEdit] = useState(false);
   const [timezoneEdit, setTimezoneEdit] = useState(false);
@@ -80,15 +80,15 @@ const MentorProfile = ({ mentor, updateMentor }) => {
     }
   }
 
-  // TODO: Uncomment this handleChange and delete the dummy handleChange once the /mentor
+  // TODO: Uncomment this handleChange and delete the dummy handleChange once the /user
   // endpoint is up and running
 
   // function handleChange(e) {
-  //   const updatedMentor = {
-  //     ...mentor,
+  //   const updatedUser = {
+  //     ...user,
   //     email: e.target.value
   //   };
-  //   updateMentor(updatedMentor);
+  //   updateUser(updatedUser);
   // }
 
   function handleChange(e) {
