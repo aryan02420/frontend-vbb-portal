@@ -1,123 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../redux/actions';
 import { Divider, Row, Col, Input, Button } from 'antd';
 
-const MentorProfile = ({ user, updateUserInfo }) => {
-  const [nameEdit, setNameEdit] = useState(false);
-  const [dobEdit, setDobEdit] = useState(false);
-  const [timezoneEdit, setTimezoneEdit] = useState(false);
-  const [emailEdit, setEmailEdit] = useState(false);
-  const [phoneEdit, setPhoneEdit] = useState(false);
-  const [cityEdit, setCityEdit] = useState(false);
-  const [languagesEdit, setLanguagesEdit] = useState(false);
-  const [passwordEdit, setPasswordEdit] = useState(false);
+import { SubmittableToggledInput } from './SubmittableToggledInput';
 
-  //TODO: Delete the below useState hook once the /user endpoint is up and running
-  const [value, setValue] = useState('');
+//need to update updateUserInfo to pass in user as a param
 
-  function handleNameClick(e) {
-    if(nameEdit === false) {
-      setNameEdit(true);
-    } else {
-      setNameEdit(false);
-    }
-  }
+const MentorProfile = ({ user, setUser, updateUserInfo }) => {
+  
+  const onChange = (key)=>(value) => {
+    console.log({value, key});
+    setUser({...user, [key]: value});
+  };
 
-  function handleDobClick(e) {
-    if(dobEdit === false) {
-      setDobEdit(true);
-    } else {
-      setDobEdit(false);
-    }
-  }
-
-  function handleTimezoneClick(e) {
-    if(timezoneEdit === false) {
-      setTimezoneEdit(true);
-    } else {
-      setTimezoneEdit(false);
-    }
-  }
-
-  function handleEmailClick(e) {
-    if(emailEdit === false) {
-      setEmailEdit(true);
-    } else {
-      setEmailEdit(false);
-    }
-  }
-
-  function handlePhoneClick(e) {
-    if(phoneEdit === false) {
-      setPhoneEdit(true);
-    } else {
-      setPhoneEdit(false);
-    }
-  }
-
-  function handleCityClick(e) {
-    if(cityEdit === false) {
-      setCityEdit(true);
-    } else {
-      setCityEdit(false);
-    }
-  }
-
-  function handleLanguagesClick(e) {
-    if(languagesEdit === false) {
-      setLanguagesEdit(true);
-    } else {
-      setLanguagesEdit(false);
-    }
-  }
-
-  function handlePasswordClick(e) {
-    if(passwordEdit === false) {
-      setPasswordEdit(true);
-    } else {
-      setPasswordEdit(false);
-    }
-  }
-
-  // TODO: Uncomment this handleChange and delete the dummy handleChange once the /user
-  // endpoint is up and running
-
-  // function handleChange(e) {
-  //   const updatedUser = {
-  //     ...user,
-  //     email: e.target.value
-  //   };
-  //   updateUser(updatedUser);
-  // }
-
-  function handleChange(e) {
-    setValue(e.target.value);
-  }
+  const onSubmit = () => {
+    updateUserInfo();
+  };
 
   return (
     <div>
       <h1>Personal info</h1>
       {/* Remove dummy data (i.e. Jane Doe) once endpoint is up and running */}
-      <Row style={{ fontWeight: 'bold' }}>Name</Row>
-      <Row>
-        <Col span={12}>
-          {nameEdit ?
-            <Input
-              name='name'
-              value={ value }
-              onChange={ handleChange }
-            />
-            : user.firstName && user.lastName || 'Jane Doe'
-            }
-            </Col>
-            {nameEdit ?
-            <Col span={12}><Button type='link' onClick={ handleNameClick }>Save</Button></Col>
-            :
-            <Col span={12}><Button type='link' onClick={ handleNameClick }>Edit</Button></Col>
-            }
-      </Row>
-      <Divider />
+      <Row style={{ fontWeight: 'bold' }}>First Name</Row>
+      <SubmittableToggledInput onChange={onChange("firstName")} onSubmit={onSubmit} value={user.firstName} name="First Name" />
+      {/* <Divider />
       <Row style={{ fontWeight: 'bold' }}>Date of birth</Row>
       <Row>
       <Col span={12}>
@@ -250,7 +157,7 @@ const MentorProfile = ({ user, updateUserInfo }) => {
             <Col span={12}><Button type='link' onClick={ handlePasswordClick }>Edit</Button></Col>
             }
       </Row>
-      <Divider />
+      <Divider /> */}
     </div>
   );
 }
