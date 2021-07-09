@@ -1,31 +1,53 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Row, Col, Input, Button } from 'antd';
 
-export const SubmittableToggledInput = ({ onChange, onSubmit, value, name }) => {
-const [editInput, setEditInput] = useState(false);
+export const SubmittableToggledInput = ({
+  onChange,
+  onSubmit,
+  value,
+  name,
+}) => {
+  const [editInput, setEditInput] = useState(false);
 
   return (
-      <Row>
-        <Col span={12}>
-          {editInput ? (
-            <Input name={name} value={value} onChange={(e) => {onChange(e.target.value)}} />
-          ) : (
-            (value) || (name)
-          )}
-        </Col>
+    <Row>
+      <Col span={12}>
         {editInput ? (
-          <Col span={12}>
-            <Button type="text" onClick={()=> {onSubmit(); setEditInput(false);}}>
-              Save
-            </Button>
-          </Col>
+          <Input
+            name={name}
+            value={value}
+            onChange={(e) => {
+              onChange(e.target.value);
+            }}
+          />
         ) : (
-          <Col span={12}>
-            <Button type="text" onClick={()=> {setEditInput(true);}}>
-              Edit
-            </Button>
-          </Col>
+          value || name
         )}
-      </Row>
+      </Col>
+      {editInput ? (
+        <Col span={12}>
+          <Button
+            type="text"
+            onClick={() => {
+              onSubmit();
+              setEditInput(false);
+            }}
+          >
+            Save
+          </Button>
+        </Col>
+      ) : (
+        <Col span={12}>
+          <Button
+            type="text"
+            onClick={() => {
+              setEditInput(true);
+            }}
+          >
+            Edit
+          </Button>
+        </Col>
+      )}
+    </Row>
   );
 };
