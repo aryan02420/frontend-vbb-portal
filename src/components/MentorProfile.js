@@ -26,6 +26,14 @@ const MentorProfile = ({ user, setUser, updateUserInfo }) => {
         name="First Name"
       />
       <Divider />
+      <Row style={{ fontWeight: 'bold' }}>Last Name</Row>
+      <SubmittableToggledInput
+        onChange={onChange('lastName')}
+        onSubmit={onSubmit}
+        value={user.lastName}
+        name="Last Name"
+      />
+      <Divider />
       <Row style={{ fontWeight: 'bold' }}>Date of birth</Row>
       <SubmittableToggledInput
         onChange={onChange('dateOfBirth')}

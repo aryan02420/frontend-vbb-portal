@@ -62,7 +62,6 @@ export const getUserInfo = (userExternalId) => async (dispatch, getState) => {
 // * endpoint: /user/ (TODO: Update as needed depending on Swagger docs provided by backend)
 
 export const updateUserInfo = (userExternalId) => async (dispatch, getState) => {
-  // dispatch(setLoading());
   try {
     const token = getState().authToken;
     const url = PYTHON_API + 'v1/user/';
@@ -74,16 +73,12 @@ export const updateUserInfo = (userExternalId) => async (dispatch, getState) => 
     //TODO: May need to be updated from a patch request to either post or put depending on Swagger docs provided by backend
     const responseData = await axios.patch({ url, headers }).data;
 
-    // dispatch(setLoadingFalse());
-    debugger
-
     //TODO REMOVE logging once we're done with setup
     console.log('res : ', responseData);
     console.log('rd: ', responseData.display);
 
     dispatch(responseData);
   } catch (err) {
-    // dispatch(setLoadingFalse());
     console.error('Error getting user info', err);
     dispatch(
       setIsError('There was an error in retrieving the user')
