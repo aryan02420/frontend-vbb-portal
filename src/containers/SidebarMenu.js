@@ -34,7 +34,7 @@ import {
             <NavLink to="/">Home</NavLink>
           </Menu.Item>
           <Menu.Item key="2" icon={<UserOutlined />}>
-            <NavLink to="/">Profile</NavLink>
+            <NavLink to="/profile">Profile</NavLink>
           </Menu.Item>
           <Menu.Item key="3" icon={<FormOutlined />}>
             <NavLink to="/booking/">Schedule</NavLink>

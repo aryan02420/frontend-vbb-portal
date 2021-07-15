@@ -9,6 +9,7 @@ import HomeSignin from '../components/HomeSignin';
 import SessionDetails from '../components/SessionDetails';
 import Donation from '../components/registration/Donation';
 import TempRegistration from '../components/registration/TempRegistration';
+import MentorProfile from '../components/MentorProfile';
 
 const Routes = ({ token }) => {
   const isLoggedIn = !!token;
@@ -40,6 +41,13 @@ const Routes = ({ token }) => {
       <Route exact path="/signup/" render={MasterForm} />
       <Route exact path="/sessiondetails/:sessionid/" render={SessionDetails} />
       <Route exact path="/donate/" render={Donation} />
+      <Route
+        exact
+        path="/profile/"
+        render={(routerProps) =>
+          isLoggedIn ? <MentorProfile {...routerProps} /> : <Redirect to="/signin" />
+        }
+      />
     </div>
   );
 };
