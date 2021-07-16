@@ -31,23 +31,21 @@ const Routes = ({ token }) => {
         }
       />
       <Route
-        exact
-        path="/booking/"
+        exact path="/booking/"
         render={(routerProps) =>
           isLoggedIn ? <Booking {...routerProps} /> : <Redirect to="/signin" />
+        }
+      />
+      <Route
+        exact path="/profile/"
+        render={(routerProps) =>
+          isLoggedIn ? <MentorProfile {...routerProps} /> : <Redirect to="/signin" />
         }
       />
       <Route exact path="/signin/" render={HomeSignin} />
       <Route exact path="/signup/" render={MasterForm} />
       <Route exact path="/sessiondetails/:sessionid/" render={SessionDetails} />
       <Route exact path="/donate/" render={Donation} />
-      <Route
-        exact
-        path="/profile/"
-        render={(routerProps) =>
-          isLoggedIn ? <MentorProfile {...routerProps} /> : <Redirect to="/signin" />
-        }
-      />
     </div>
   );
 };
