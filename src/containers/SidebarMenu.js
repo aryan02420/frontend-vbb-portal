@@ -7,6 +7,7 @@ import {
     HomeOutlined,
     LogoutOutlined,
     UserOutlined,
+    DatabaseOutlined
   } from '@ant-design/icons';
   import { Avatar, Menu } from 'antd';
   import { Link, NavLink } from 'react-router-dom';
@@ -44,6 +45,9 @@ import {
           </Menu.Item>
           <Menu.Item key="5" icon={<LogoutOutlined />}>
             <Link onClick={ logOut }>Logout</Link>
+          </Menu.Item>
+          <Menu.Item key="6" icon={<DatabaseOutlined />}>
+            <NavLink to="/admin/">Admin</NavLink>
           </Menu.Item>
         </Menu>
         <div>
